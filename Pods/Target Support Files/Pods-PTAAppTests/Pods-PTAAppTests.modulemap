@@ -1,0 +1,6 @@
+framework module Pods_PTAAppTests {
+  umbrella header "Pods-PTAAppTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
