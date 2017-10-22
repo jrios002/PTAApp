@@ -12,21 +12,27 @@ class Event {
     var id: Int64?
     var name: String?
     var date: String?
-    var time: String?
+    var beginTime: String?
+    var endTime: String?
     var location: String?
     var description: String?
-    var volunteer: String?
+    var volunteers: [String]?
+    var volunteersBeginTime: [String]?
+    var volunteersEndTime: [String]?
     
     init() {
         name = ""
         date = ""
-        time = ""
+        beginTime = ""
+        endTime = ""
         location = ""
         description = ""
-        volunteer = ""
+        volunteers = [String]()
+        volunteersBeginTime = [String]()
+        volunteersEndTime = [String]()
     }
     
     func GetDescription() -> String {
-        return name! + "::" + date! + "::" + time! + "::" + location! + "::" + description! + "::" + volunteer!
+        return name! + "::" + date! + "::" + beginTime! + "::" + endTime! + "::" + location! + "::" + description!
     }
 }

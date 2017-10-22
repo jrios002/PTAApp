@@ -81,4 +81,14 @@ class FireLoginSvc: IFirebaseService {
         print("\(message)")
         return message
     }
+    
+    func firebaseSignOut() -> Void {
+        let firebaseAuth = FIRAuth.auth()
+        do {
+            try firebaseAuth?.signOut()
+            message = "SUCCESS"
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+    }
 }

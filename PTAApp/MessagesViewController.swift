@@ -9,9 +9,11 @@
 import UIKit
 import Firebase
 
-class MessagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MessagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    let menuList = ["Home", "Create Event", "Select School", "Log Out"]
+    let menuLauncher: MenuLauncher = MenuLauncher()
     
     var chatRef: FIRDatabaseReference!
     var msse652: FIRDatabaseHandle!
@@ -19,6 +21,10 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
     var userName: String = ""
     
     @IBOutlet weak var chatTxt: UITextField!
+    @IBAction func menuBar(_ sender: Any) {
+        NSLog("entering menu button")
+        menuLauncher.showMenu(menuList: menuList)
+    }
     @IBAction func sendBtn(_ sender: Any) {
         let message = chatTxt.text
         if message != "" {
@@ -33,7 +39,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "chatCell", for: indexPath)
-        
+        cell.backgroundColor = UIColor.clear
         cell.textLabel?.text = messages[indexPath.row]
         
         return cell
@@ -42,18 +48,16 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
     let gradientLayer = CAGradientLayer()
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.backgroundColor = UIColor.clear
         view.setGradientBackground(colorOne: Colors.orange, colorTwo: Colors.blue, gradientLayer: gradientLayer)
         loadTable()
+        self.chatTxt.delegate = self
     }
     
     override func viewDidLayoutSubviews() {
         super.viewWillLayoutSubviews()
         gradientLayer.frame = view.layer.bounds
         view.setGradientBackground(colorOne: Colors.orange, colorTwo: Colors.blue, gradientLayer: gradientLayer)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
     
     func loadTable() {
@@ -71,5 +75,15 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
             self.tableView.reloadData()
         })
         NSLog("EXITING loadTable")
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        let message = chatTxt.text
+        if message != "" {
+            chatRef.child("MSSE 692").childByAutoId().setValue(userName + " posted: " + message!)
+            chatTxt.text = ""
+        }
+        return true
     }
 }

@@ -35,4 +35,10 @@ class FirebaseMgr: ManagerSuperType{
         
         return message
     }
+    
+    func signOutFirebase(){
+        let factory: Factory! = Factory()
+        let firebaseSvc: IFirebaseService! = (factory.getService(serviceName: "FirebaseLoginSvcImpl") as? IFirebaseService)
+        firebaseSvc.firebaseSignOut()
+    }
 }

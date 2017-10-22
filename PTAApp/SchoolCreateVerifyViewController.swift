@@ -22,7 +22,7 @@ class SchoolCreateVerifyViewController: UIViewController {
     }
     
     @IBAction func okBtn(_ sender: UIButton) {
-        let vc = self.storyboard!.instantiateViewController(withIdentifier: "SchoolSelectionViewController")
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: "Select School")
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -37,10 +37,6 @@ class SchoolCreateVerifyViewController: UIViewController {
         super.viewWillLayoutSubviews()
         gradientLayer.frame = view.layer.bounds
         view.setGradientBackground(colorOne: Colors.orange, colorTwo: Colors.blue, gradientLayer: gradientLayer)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
 
 }

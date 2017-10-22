@@ -21,12 +21,17 @@
 		54409CE51F866E65003411D7 /* SchoolSvcSQLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54409CE41F866E65003411D7 /* SchoolSvcSQLite.swift */; };
 		54409CE71F86756F003411D7 /* SchoolMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54409CE61F86756F003411D7 /* SchoolMgr.swift */; };
 		54409CE91F86B7D4003411D7 /* CustomActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54409CE81F86B7D4003411D7 /* CustomActivityIndicator.swift */; };
+		54409CED1F891366003411D7 /* MenuLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54409CEC1F891366003411D7 /* MenuLauncher.swift */; };
+		54409CF31F8C3E9A003411D7 /* AddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54409CF21F8C3E9A003411D7 /* AddEventViewController.swift */; };
+		54409CF51F8C4414003411D7 /* AddEventVolunteersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54409CF41F8C4414003411D7 /* AddEventVolunteersViewController.swift */; };
+		54409CF71F8C4AC2003411D7 /* AddVolunteerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54409CF61F8C4AC2003411D7 /* AddVolunteerTableViewCell.swift */; };
 		5446F7B21F80776A004EE24D /* VolunteerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5446F7B11F80776A004EE24D /* VolunteerListViewController.swift */; };
 		5446F7B41F807BE4004EE24D /* VolunteerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5446F7B31F807BE4004EE24D /* VolunteerTableViewCell.swift */; };
 		5446F7B61F8091B7004EE24D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5446F7B51F8091B7004EE24D /* GoogleService-Info.plist */; };
 		5446F7B91F809D56004EE24D /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5446F7B81F809D56004EE24D /* MessagesViewController.swift */; };
 		544A2D301F7882E400868CE6 /* FirebaseLoginSvc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544A2D2F1F7882E400868CE6 /* FirebaseLoginSvc.swift */; };
 		5454D6D41F71FC41001E7EA6 /* SchoolCreateVerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5454D6D31F71FC41001E7EA6 /* SchoolCreateVerifyViewController.swift */; };
+		5481AEE21F9458CE00C489EA /* UIApplicationAndExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5481AEE11F9458CE00C489EA /* UIApplicationAndExtension.swift */; };
 		5492791F1F60BE6500BEDAFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5492791E1F60BE6500BEDAFB /* AppDelegate.swift */; };
 		549279211F60BE6500BEDAFB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549279201F60BE6500BEDAFB /* ViewController.swift */; };
 		549279241F60BE6500BEDAFB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 549279221F60BE6500BEDAFB /* Main.storyboard */; };
@@ -96,12 +101,17 @@
 		54409CE41F866E65003411D7 /* SchoolSvcSQLite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolSvcSQLite.swift; sourceTree = "<group>"; };
 		54409CE61F86756F003411D7 /* SchoolMgr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolMgr.swift; sourceTree = "<group>"; };
 		54409CE81F86B7D4003411D7 /* CustomActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomActivityIndicator.swift; sourceTree = "<group>"; };
+		54409CEC1F891366003411D7 /* MenuLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuLauncher.swift; sourceTree = "<group>"; };
+		54409CF21F8C3E9A003411D7 /* AddEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventViewController.swift; sourceTree = "<group>"; };
+		54409CF41F8C4414003411D7 /* AddEventVolunteersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventVolunteersViewController.swift; sourceTree = "<group>"; };
+		54409CF61F8C4AC2003411D7 /* AddVolunteerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddVolunteerTableViewCell.swift; sourceTree = "<group>"; };
 		5446F7B11F80776A004EE24D /* VolunteerListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteerListViewController.swift; sourceTree = "<group>"; };
 		5446F7B31F807BE4004EE24D /* VolunteerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteerTableViewCell.swift; sourceTree = "<group>"; };
 		5446F7B51F8091B7004EE24D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5446F7B81F809D56004EE24D /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		544A2D2F1F7882E400868CE6 /* FirebaseLoginSvc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseLoginSvc.swift; sourceTree = "<group>"; };
 		5454D6D31F71FC41001E7EA6 /* SchoolCreateVerifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolCreateVerifyViewController.swift; sourceTree = "<group>"; };
+		5481AEE11F9458CE00C489EA /* UIApplicationAndExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplicationAndExtension.swift; sourceTree = "<group>"; };
 		5492791B1F60BE6500BEDAFB /* PTAApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PTAApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5492791E1F60BE6500BEDAFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		549279201F60BE6500BEDAFB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -270,9 +280,10 @@
 				541162E61F7DE25B0035E425 /* ItemsForSaleListViewController.swift */,
 				541162E81F7DE31E0035E425 /* MessageBoardListViewController.swift */,
 				5446F7B11F80776A004EE24D /* VolunteerListViewController.swift */,
-				5446F7B31F807BE4004EE24D /* VolunteerTableViewCell.swift */,
 				5446F7B81F809D56004EE24D /* MessagesViewController.swift */,
 				54C371651F83115A004D972A /* PTAApp-Bridging-Header.h */,
+				54409CF21F8C3E9A003411D7 /* AddEventViewController.swift */,
+				54409CF41F8C4414003411D7 /* AddEventVolunteersViewController.swift */,
 			);
 			path = PTAApp;
 			sourceTree = "<group>";
@@ -324,6 +335,10 @@
 				54EC53E81F689D870074630B /* UIViewAndExtenstion.swift */,
 				54EC53EA1F689F6F0074630B /* Constants.swift */,
 				54409CE81F86B7D4003411D7 /* CustomActivityIndicator.swift */,
+				54409CEC1F891366003411D7 /* MenuLauncher.swift */,
+				5446F7B31F807BE4004EE24D /* VolunteerTableViewCell.swift */,
+				54409CF61F8C4AC2003411D7 /* AddVolunteerTableViewCell.swift */,
+				5481AEE11F9458CE00C489EA /* UIApplicationAndExtension.swift */,
 			);
 			name = Presentation;
 			sourceTree = "<group>";
@@ -650,6 +665,7 @@
 				541162E91F7DE31E0035E425 /* MessageBoardListViewController.swift in Sources */,
 				549279521F60C26100BEDAFB /* Event.swift in Sources */,
 				54E6EEC41F79F15B0043576F /* IService.swift in Sources */,
+				5481AEE21F9458CE00C489EA /* UIApplicationAndExtension.swift in Sources */,
 				549279211F60BE6500BEDAFB /* ViewController.swift in Sources */,
 				54E6EEC21F79E8F60043576F /* SchoolSelectionViewController.swift in Sources */,
 				541162E31F7DD6ED0035E425 /* SchoolEventListViewController.swift in Sources */,
@@ -663,15 +679,18 @@
 				5454D6D41F71FC41001E7EA6 /* SchoolCreateVerifyViewController.swift in Sources */,
 				5446F7B21F80776A004EE24D /* VolunteerListViewController.swift in Sources */,
 				54EC53E91F689D870074630B /* UIViewAndExtenstion.swift in Sources */,
+				54409CF71F8C4AC2003411D7 /* AddVolunteerTableViewCell.swift in Sources */,
 				54C371751F83115B004D972A /* FMDatabasePool.m in Sources */,
 				54EC53EB1F689F6F0074630B /* Constants.swift in Sources */,
 				549279561F60C68300BEDAFB /* ItemForSale.swift in Sources */,
 				54AF337C1F74A7ED00AC856C /* RegisterUserViewController.swift in Sources */,
 				54409CE31F866E1B003411D7 /* ISchoolSQLiteSvc.swift in Sources */,
 				5492791F1F60BE6500BEDAFB /* AppDelegate.swift in Sources */,
+				54409CF51F8C4414003411D7 /* AddEventVolunteersViewController.swift in Sources */,
 				54409CE71F86756F003411D7 /* SchoolMgr.swift in Sources */,
 				542C28BC1F85E0B200871E70 /* MemberMgr.swift in Sources */,
 				5446F7B41F807BE4004EE24D /* VolunteerTableViewCell.swift in Sources */,
+				54409CF31F8C3E9A003411D7 /* AddEventViewController.swift in Sources */,
 				54409CE91F86B7D4003411D7 /* CustomActivityIndicator.swift in Sources */,
 				54E6EEC81F79F46C0043576F /* Factory.swift in Sources */,
 				541162E51F7DDA910035E425 /* EventDetailsViewController.swift in Sources */,
@@ -682,6 +701,7 @@
 				544A2D301F7882E400868CE6 /* FirebaseLoginSvc.swift in Sources */,
 				54409CE51F866E65003411D7 /* SchoolSvcSQLite.swift in Sources */,
 				54C371731F83115B004D972A /* FMDatabaseQueue.m in Sources */,
+				54409CED1F891366003411D7 /* MenuLauncher.swift in Sources */,
 				54CD747A1F7B378B00ACBF46 /* ManagerSuperType.swift in Sources */,
 				54C371801F832AD2004D972A /* EventMgr.swift in Sources */,
 				549279541F60C31F00BEDAFB /* Member.swift in Sources */,

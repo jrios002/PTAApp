@@ -10,7 +10,12 @@ import UIKit
 
 class SchoolSelectionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    var school: School = School()
     var schools = [School]()
+    let menuLauncher = MenuLauncher()
+    let menuList = ["Home", "Create School", "Log Out"]
+    
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var selectedSchoolText: UITextField!
     @IBAction func selectSchoolBtn(_ sender: Any) {
         if selectedSchoolText.text != "" {
@@ -26,10 +31,10 @@ class SchoolSelectionViewController: UIViewController, UITableViewDelegate, UITa
             present(selectAlert, animated: true, completion: nil)
         }
     }
+    
     @IBAction func MenuButton(_ sender: Any) {
         NSLog("entering menu button")
-        let vc = self.storyboard!.instantiateViewController(withIdentifier: "LoginScreenViewController")
-        self.present(vc, animated: true, completion: nil)
+        menuLauncher.showMenu(menuList: menuList)
     }
     
     @IBAction func unwindSegue(segue: UIStoryboardSegue){
@@ -37,22 +42,22 @@ class SchoolSelectionViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     let gradientLayer = CAGradientLayer()
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let schoolMgr: SchoolMgr = SchoolMgr()
-        schools = schoolMgr.retrieveAll()
-        view.setGradientBackground(colorOne: Colors.orange, colorTwo: Colors.blue, gradientLayer: gradientLayer)
-    }
 
     override func viewDidLayoutSubviews() {
         super.viewWillLayoutSubviews()
         gradientLayer.frame = view.layer.bounds
         view.setGradientBackground(colorOne: Colors.orange, colorTwo: Colors.blue, gradientLayer: gradientLayer)
+        
+        if (menuShowing){
+            menuLauncher.showMenu(menuList: menuList)
+        }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.backgroundColor = UIColor.clear
+        let schoolMgr: SchoolMgr = SchoolMgr()
+        schools = schoolMgr.retrieveAll()
+        view.setGradientBackground(colorOne: Colors.orange, colorTwo: Colors.blue, gradientLayer: gradientLayer)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -61,21 +66,24 @@ class SchoolSelectionViewController: UIViewController, UITableViewDelegate, UITa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
-        let school: School = self.schools[indexPath.row]
+        self.school = self.schools[indexPath.row]
+        cell.backgroundColor = UIColor.clear
         cell.textLabel?.text = school.name
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        myIndex = indexPath.row
-        let school: School = self.schools[indexPath.row]
+        self.school = self.schools[indexPath.row]
         selectedSchoolText.text = school.name
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         NSLog("entering prepare for segue")
+        let destination = (segue.destination as? SchoolEventListViewController)
+        if segue.identifier == "segueToEventList" {
+            destination?.school = school
+        }
         NSLog("exiting prepare for segue")
     }
-
 }

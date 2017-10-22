@@ -13,4 +13,5 @@ protocol IFirebaseService: IService {
     func emailSignUp (email: String, password: String) -> Void
     func anonymousSignIn() -> Void
     func retrieveMessage() -> String
+    func firebaseSignOut() -> Void
 }

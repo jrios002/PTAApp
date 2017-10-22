@@ -9,7 +9,13 @@
 import UIKit
 
 class MessageBoardListViewController: UIViewController {
+    let menuList = ["Home", "Create Event", "Select School", "Log Out"]
+    let menuLauncher: MenuLauncher = MenuLauncher()
     
+    @IBAction func menuBar(_ sender: Any) {
+        NSLog("entering menu button")
+        menuLauncher.showMenu(menuList: menuList)
+    }
     @IBOutlet weak var userNameTxt: UITextField!
     
     let gradientLayer = CAGradientLayer()
@@ -28,10 +34,6 @@ class MessageBoardListViewController: UIViewController {
         let firebaseMgr: FirebaseMgr = FirebaseMgr()
         firebaseMgr.anonSignIn()
         self.performSegue(withIdentifier: "segueToMessages", sender: nil)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

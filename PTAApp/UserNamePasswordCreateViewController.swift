@@ -14,14 +14,12 @@ class UserNamePasswordCreateViewController: UIViewController {
     @IBOutlet weak var usernameText: UITextField!
     @IBOutlet weak var passwordText: UITextField!
     @IBOutlet weak var passwordVerifyText: UITextField!
+    
     @IBAction func backBtn(_ sender: Any) {
         NSLog("entering back button")
         self.performSegue(withIdentifier: "unwindFromUserNameCreate", sender: self)
     }
-    @IBAction func facebookLoginBtn(_ sender: Any) {
-    }
-    @IBAction func googleLoginBtn(_ sender: Any) {
-    }
+    
     @IBAction func nextBtn(_ sender: Any) {
         var message: String = ""
         
@@ -85,10 +83,6 @@ class UserNamePasswordCreateViewController: UIViewController {
         super.viewWillLayoutSubviews()
         gradientLayer.frame = view.layer.bounds
         view.setGradientBackground(colorOne: Colors.orange, colorTwo: Colors.blue, gradientLayer: gradientLayer)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
