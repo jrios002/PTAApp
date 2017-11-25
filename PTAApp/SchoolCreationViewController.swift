@@ -8,33 +8,52 @@
 
 import UIKit
 
-class SchoolCreationViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class SchoolCreationViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var randomString: String? = ""
     let stateData: [String]! = ["", "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
     @IBOutlet weak var nameText: UITextField!
     @IBOutlet weak var addressText: UITextField!
     @IBOutlet weak var cityText: UITextField!
+    @IBOutlet weak var zipCodeText: UITextField!
     @IBOutlet weak var phoneText: UITextField!
     @IBOutlet weak var stateText: UITextField!
     @IBAction func addImageBtn(_ sender: UIButton) {
     }
     @IBAction func createSchoolBtn(_ sender: UIButton) {
         randomString = getRandomString(length: 10)
-        
-        let school: School = School()
-        school.name = nameText.text
-        school.address = addressText.text
-        school.city = cityText.text
-        school.state = stateText.text
-        school.phone = phoneText.text
-        school.adminCode = randomString
-        
-        let schoolMgr: SchoolMgr = SchoolMgr()
-        schoolMgr.create(school)
-        
-        self.performSegue(withIdentifier: "segueToSchoolCreateVerify", sender: self)
+        if nameText.text != "" && zipCodeText.text != "" {
+            let school: School = School()
+            school.name = nameText.text
+            school.address = addressText.text
+            school.city = cityText.text
+            school.state = stateText.text
+            school.zipCode = zipCodeText.text
+            school.phone = phoneText.text
+            school.adminCode = randomString
+            if schoolImage.image == #imageLiteral(resourceName: "emptyImage2") {
+                school.schoolImage = #imageLiteral(resourceName: "noImage")
+            }
+            else {
+                school.schoolImage = schoolImage.image
+            }
+            
+            let schoolMgr: SchoolMgr = SchoolMgr()
+            schoolMgr.create(school)
+            
+            self.performSegue(withIdentifier: "segueToSchoolCreateVerify", sender: self)
+        }
+        else {
+            let createAlert = UIAlertController(title: "Missing Fields!!", message: "A school Name and Zip Code must be entered to create school!!", preferredStyle: UIAlertControllerStyle.alert)
+            
+            createAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                print("Exiting from alert")
+            }))
+            
+            present(createAlert, animated: true, completion: nil)
+        }
     }
+    
     @IBOutlet weak var schoolImage: UIImageView!
     @IBAction func backBtn(_ sender: Any) {
         NSLog("entering back button")
@@ -50,6 +69,9 @@ class SchoolCreationViewController: UIViewController, UIPickerViewDelegate, UIPi
         super.viewDidLoad()
         createStatePicker()
         createToolbar()
+        schoolImage.image = #imageLiteral(resourceName: "emptyImage2")
+        schoolImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectEventImageView)))
+        schoolImage.isUserInteractionEnabled = true
         view.setGradientBackground(colorOne: Colors.orange, colorTwo: Colors.blue, gradientLayer: gradientLayer)
     }
 
@@ -117,6 +139,31 @@ class SchoolCreationViewController: UIViewController, UIPickerViewDelegate, UIPi
         }
         
         return randString
+    }
+    
+    func handleSelectEventImageView() {
+        let picker = UIImagePickerController()
+        
+        picker.delegate = self
+        picker.allowsEditing = true
+        present(picker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        var selectedImageFromPicker: UIImage?
+        
+        if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
+            selectedImageFromPicker = editedImage
+        }
+        else if let originalImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+            selectedImageFromPicker = originalImage
+        }
+        
+        if let selectedImage = selectedImageFromPicker {
+            schoolImage.image = selectedImage
+        }
+        
+        dismiss(animated: true, completion: nil)
     }
 
 }

@@ -9,16 +9,25 @@
 import UIKit
 
 class AddEventVolunteersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
-    var event: Event = Event()
+    var updateEvent: Event = Event()
     var isUpdating: Bool = false
+    var isUpdatingVolunteers: Bool = false
     var volunteers = [String]()
     var volunteersBeginTime = [String]()
     var volunteersEndTime = [String]()
     var rowBeingEdited: Int = 0
-    let menuList = ["Home", "Select School", "Log Out"]
+    let menuList = ["Home", "Select School", "Add Item For Sale", "Edit User Info", "Edit Email Password", "Log Out"]
+    let userList = ["Edit User Info", "Edit Email Password", "Log Out"]
     let menuLauncher: MenuLauncher = MenuLauncher()
+    let userMenu = MenuLauncher()
     private var currentTextField: UITextField?
+    @IBOutlet weak var guestBtn: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    @IBAction func guestBtn(_ sender: Any) {
+        userMenu.showMenu(menuList: userList)
+    }
     
     @IBAction func menuBar(_ sender: Any) {
         NSLog("entering menu button")
@@ -48,33 +57,48 @@ class AddEventVolunteersViewController: UIViewController, UITableViewDelegate, U
             self.present(loginAlert, animated: true, completion: nil)
         }
         else {
-            event.volunteers = volunteers
-            event.volunteersBeginTime = volunteersBeginTime
-            event.volunteersEndTime = volunteersEndTime
+            if isUpdatingVolunteers {
+                let updateEventMgr: EventMgr = EventMgr()
+                updateEventMgr.delete(updateEvent, school: selectedSchool)
+                isUpdatingVolunteers = false
+            }
+            updateEvent.volunteers = volunteers
+            updateEvent.volunteersBeginTime = volunteersBeginTime
+            updateEvent.volunteersEndTime = volunteersEndTime
             
             let eventMgr: EventMgr = EventMgr()
-            if isUpdating {
-                let location: Int = Int(event.id!)
-                eventMgr.update(event, index: location)
-            }
-            else {
-                eventMgr.create(event)
-            }
+            eventMgr.create(updateEvent, school: selectedSchool)
             
-            self.performSegue(withIdentifier: "unwindFromAddEvent", sender: self)
+            let activityInd: CustomActivityIndicator = CustomActivityIndicator()
+            activityInd.customActivityIndicatory(self.view, startAnimate: true).startAnimating()
+            
+            UIApplication.shared.beginIgnoringInteractionEvents()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                UIApplication.shared.endIgnoringInteractionEvents()
+                self.performSegue(withIdentifier: "unwindFromAddEvent", sender: self)
+            }
         }
     }
     
     let gradientLayer = CAGradientLayer()
     override func viewDidLoad() {
         super.viewDidLoad()
-        if isUpdating {
-            addEventBtn.setTitle("Update Event", for: .normal)
-            volunteers = event.volunteers!
-            volunteersBeginTime = event.volunteersBeginTime!
-            volunteersEndTime = event.volunteersEndTime!
+        if (currentMember.firstName?.isEmpty)! {
+            guestBtn.title = "Hello Guest"
         }
         else {
+            guestBtn.title = ("Hello " + currentMember.firstName!)
+        }
+        if isUpdating {
+            titleLabel.text = "Update Volunteer Slots"
+            addEventBtn.setTitle("Update Event", for: .normal)
+            volunteers = updateEvent.volunteers!
+            volunteersBeginTime = updateEvent.volunteersBeginTime!
+            volunteersEndTime = updateEvent.volunteersEndTime!
+        }
+        else {
+            titleLabel.text = "Add Volunteer Slots"
             addEventBtn.setTitle("Add Event", for: .normal)
         }
         tableView.backgroundColor = UIColor.clear

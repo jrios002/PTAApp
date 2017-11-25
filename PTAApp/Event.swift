@@ -6,7 +6,7 @@
 //  Copyright © 2017 Jacob Rios. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class Event {
     var id: Int64?
@@ -19,6 +19,8 @@ class Event {
     var volunteers: [String]?
     var volunteersBeginTime: [String]?
     var volunteersEndTime: [String]?
+    var eventImage: UIImage?
+    var eventImgUrl: String?
     
     init() {
         name = ""
@@ -30,9 +32,10 @@ class Event {
         volunteers = [String]()
         volunteersBeginTime = [String]()
         volunteersEndTime = [String]()
+        eventImgUrl = ""
     }
     
     func GetDescription() -> String {
-        return name! + "::" + date! + "::" + beginTime! + "::" + endTime! + "::" + location! + "::" + description!
+        return name! + "::" + date! + "::" + beginTime! + "::" + endTime! + "::" + location! + "::" + description! + "::" + eventImgUrl!
     }
 }

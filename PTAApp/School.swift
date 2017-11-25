@@ -6,7 +6,7 @@
 //  Copyright © 2017 Jacob Rios. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class School{
     var id: Int64?
@@ -16,8 +16,22 @@ class School{
     var state: String?
     var phone: String?
     var adminCode: String?
+    var zipCode: String?
+    var schoolImage: UIImage?
+    var schoolImgUrl: String?
+    
+    init(){
+        name = ""
+        address = ""
+        city = ""
+        state = ""
+        phone = ""
+        adminCode = ""
+        zipCode = ""
+        schoolImgUrl = ""
+    }
     
     func GetDescription() -> String {
-        return name! + "::" + address! + "::" + city! + "::" + phone!
+        return name! + "::" + address! + "::" + city! + "::" + phone! + "::" + zipCode! + "::" + schoolImgUrl!
     }
 }

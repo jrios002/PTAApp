@@ -27,11 +27,24 @@
 		54409CF71F8C4AC2003411D7 /* AddVolunteerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54409CF61F8C4AC2003411D7 /* AddVolunteerTableViewCell.swift */; };
 		5446F7B21F80776A004EE24D /* VolunteerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5446F7B11F80776A004EE24D /* VolunteerListViewController.swift */; };
 		5446F7B41F807BE4004EE24D /* VolunteerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5446F7B31F807BE4004EE24D /* VolunteerTableViewCell.swift */; };
-		5446F7B61F8091B7004EE24D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5446F7B51F8091B7004EE24D /* GoogleService-Info.plist */; };
 		5446F7B91F809D56004EE24D /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5446F7B81F809D56004EE24D /* MessagesViewController.swift */; };
 		544A2D301F7882E400868CE6 /* FirebaseLoginSvc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544A2D2F1F7882E400868CE6 /* FirebaseLoginSvc.swift */; };
+		544AB0661F9EB4AF00E2BCE2 /* EventFirebaseDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544AB0651F9EB4AF00E2BCE2 /* EventFirebaseDBService.swift */; };
+		544AB0681F9EB50400E2BCE2 /* SchoolFirebaseDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544AB0671F9EB50400E2BCE2 /* SchoolFirebaseDBService.swift */; };
+		544AB06A1F9EB74F00E2BCE2 /* ISchoolFirebaseSvc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544AB0691F9EB74F00E2BCE2 /* ISchoolFirebaseSvc.swift */; };
+		544B24CB1FBA97CC00A11276 /* ItemsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544B24CA1FBA97CC00A11276 /* ItemsCollectionViewCell.swift */; };
+		544B24CD1FBA9C6400A11276 /* IItemsForSaleFirebaseSvc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544B24CC1FBA9C6400A11276 /* IItemsForSaleFirebaseSvc.swift */; };
+		544B24CF1FBA9CC200A11276 /* ItemForSaleFirebaseDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544B24CE1FBA9CC200A11276 /* ItemForSaleFirebaseDBService.swift */; };
+		544B24D11FBAA18B00A11276 /* ItemForSaleMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544B24D01FBAA18B00A11276 /* ItemForSaleMgr.swift */; };
 		5454D6D41F71FC41001E7EA6 /* SchoolCreateVerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5454D6D31F71FC41001E7EA6 /* SchoolCreateVerifyViewController.swift */; };
+		545C93F41FA670BF0025477A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 545C93F31FA670BF0025477A /* GoogleService-Info.plist */; };
+		545C93F61FA7F1330025477A /* SchoolListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545C93F51FA7F1330025477A /* SchoolListTableViewCell.swift */; };
+		545C93F81FA8081A0025477A /* EventListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545C93F71FA8081A0025477A /* EventListTableViewCell.swift */; };
+		545C93FA1FAAAE770025477A /* IMemberFirebaseSvc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545C93F91FAAAE770025477A /* IMemberFirebaseSvc.swift */; };
+		545C93FC1FAAAED50025477A /* MemberFirebaseDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545C93FB1FAAAED50025477A /* MemberFirebaseDBService.swift */; };
 		5481AEE21F9458CE00C489EA /* UIApplicationAndExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5481AEE11F9458CE00C489EA /* UIApplicationAndExtension.swift */; };
+		5491EAAC1FC9FDDC0089977E /* SocialMediaShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5491EAAB1FC9FDDC0089977E /* SocialMediaShareViewController.swift */; };
+		5491EAAE1FC9FEE00089977E /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5491EAAD1FC9FEE00089977E /* Social.framework */; };
 		5492791F1F60BE6500BEDAFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5492791E1F60BE6500BEDAFB /* AppDelegate.swift */; };
 		549279211F60BE6500BEDAFB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549279201F60BE6500BEDAFB /* ViewController.swift */; };
 		549279241F60BE6500BEDAFB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 549279221F60BE6500BEDAFB /* Main.storyboard */; };
@@ -45,6 +58,7 @@
 		549279561F60C68300BEDAFB /* ItemForSale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549279551F60C68300BEDAFB /* ItemForSale.swift */; };
 		54AF337A1F74A13100AC856C /* UserNamePasswordCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AF33791F74A13100AC856C /* UserNamePasswordCreateViewController.swift */; };
 		54AF337C1F74A7ED00AC856C /* RegisterUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AF337B1F74A7ED00AC856C /* RegisterUserViewController.swift */; };
+		54BFF97B1FA36FD100A54F74 /* IEventFirebaseSvc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BFF97A1FA36FD100A54F74 /* IEventFirebaseSvc.swift */; };
 		54C371641F831064004D972A /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 54C371631F831064004D972A /* libsqlite3.tbd */; settings = {ATTRIBUTES = (Required, ); }; };
 		54C371711F83115B004D972A /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 54C371681F83115B004D972A /* FMDatabase.m */; };
 		54C371721F83115B004D972A /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 54C3716A1F83115B004D972A /* FMResultSet.m */; };
@@ -53,6 +67,9 @@
 		54C371751F83115B004D972A /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 54C371701F83115B004D972A /* FMDatabasePool.m */; };
 		54C371771F83126D004D972A /* EventSvcSQLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C371761F83126D004D972A /* EventSvcSQLite.swift */; };
 		54C371801F832AD2004D972A /* EventMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C3717F1F832AD2004D972A /* EventMgr.swift */; };
+		54CC01B61FBBB59E007FAE3B /* AddItemForSaleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CC01B51FBBB59E007FAE3B /* AddItemForSaleViewController.swift */; };
+		54CC01B81FC1E5F1007FAE3B /* ItemDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CC01B71FC1E5F1007FAE3B /* ItemDetailsViewController.swift */; };
+		54CC01BA1FC3B9ED007FAE3B /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CC01B91FC3B9ED007FAE3B /* CartViewController.swift */; };
 		54CD74781F7B369D00ACBF46 /* IFirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CD74771F7B369D00ACBF46 /* IFirebaseService.swift */; };
 		54CD747A1F7B378B00ACBF46 /* ManagerSuperType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CD74791F7B378B00ACBF46 /* ManagerSuperType.swift */; };
 		54CD747C1F7B382700ACBF46 /* FirebaseMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CD747B1F7B382700ACBF46 /* FirebaseMgr.swift */; };
@@ -107,11 +124,24 @@
 		54409CF61F8C4AC2003411D7 /* AddVolunteerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddVolunteerTableViewCell.swift; sourceTree = "<group>"; };
 		5446F7B11F80776A004EE24D /* VolunteerListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteerListViewController.swift; sourceTree = "<group>"; };
 		5446F7B31F807BE4004EE24D /* VolunteerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteerTableViewCell.swift; sourceTree = "<group>"; };
-		5446F7B51F8091B7004EE24D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5446F7B81F809D56004EE24D /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		544A2D2F1F7882E400868CE6 /* FirebaseLoginSvc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseLoginSvc.swift; sourceTree = "<group>"; };
+		544AB0651F9EB4AF00E2BCE2 /* EventFirebaseDBService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventFirebaseDBService.swift; sourceTree = "<group>"; };
+		544AB0671F9EB50400E2BCE2 /* SchoolFirebaseDBService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolFirebaseDBService.swift; sourceTree = "<group>"; };
+		544AB0691F9EB74F00E2BCE2 /* ISchoolFirebaseSvc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISchoolFirebaseSvc.swift; sourceTree = "<group>"; };
+		544B24CA1FBA97CC00A11276 /* ItemsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsCollectionViewCell.swift; sourceTree = "<group>"; };
+		544B24CC1FBA9C6400A11276 /* IItemsForSaleFirebaseSvc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IItemsForSaleFirebaseSvc.swift; sourceTree = "<group>"; };
+		544B24CE1FBA9CC200A11276 /* ItemForSaleFirebaseDBService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemForSaleFirebaseDBService.swift; sourceTree = "<group>"; };
+		544B24D01FBAA18B00A11276 /* ItemForSaleMgr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemForSaleMgr.swift; sourceTree = "<group>"; };
 		5454D6D31F71FC41001E7EA6 /* SchoolCreateVerifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolCreateVerifyViewController.swift; sourceTree = "<group>"; };
+		545C93F31FA670BF0025477A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		545C93F51FA7F1330025477A /* SchoolListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolListTableViewCell.swift; sourceTree = "<group>"; };
+		545C93F71FA8081A0025477A /* EventListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListTableViewCell.swift; sourceTree = "<group>"; };
+		545C93F91FAAAE770025477A /* IMemberFirebaseSvc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMemberFirebaseSvc.swift; sourceTree = "<group>"; };
+		545C93FB1FAAAED50025477A /* MemberFirebaseDBService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberFirebaseDBService.swift; sourceTree = "<group>"; };
 		5481AEE11F9458CE00C489EA /* UIApplicationAndExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplicationAndExtension.swift; sourceTree = "<group>"; };
+		5491EAAB1FC9FDDC0089977E /* SocialMediaShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialMediaShareViewController.swift; sourceTree = "<group>"; };
+		5491EAAD1FC9FEE00089977E /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		5492791B1F60BE6500BEDAFB /* PTAApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PTAApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5492791E1F60BE6500BEDAFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		549279201F60BE6500BEDAFB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -132,6 +162,7 @@
 		54ADED5D1F774D65006A489F /* PTAApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PTAApp.entitlements; sourceTree = "<group>"; };
 		54AF33791F74A13100AC856C /* UserNamePasswordCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNamePasswordCreateViewController.swift; sourceTree = "<group>"; };
 		54AF337B1F74A7ED00AC856C /* RegisterUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterUserViewController.swift; sourceTree = "<group>"; };
+		54BFF97A1FA36FD100A54F74 /* IEventFirebaseSvc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IEventFirebaseSvc.swift; sourceTree = "<group>"; };
 		54C371631F831064004D972A /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		54C371651F83115A004D972A /* PTAApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PTAApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		54C371661F83115B004D972A /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDB.h; path = ../../../Documents/fmdb/src/fmdb/FMDB.h; sourceTree = "<group>"; };
@@ -147,6 +178,9 @@
 		54C371701F83115B004D972A /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabasePool.m; path = ../../../Documents/fmdb/src/fmdb/FMDatabasePool.m; sourceTree = "<group>"; };
 		54C371761F83126D004D972A /* EventSvcSQLite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventSvcSQLite.swift; sourceTree = "<group>"; };
 		54C3717F1F832AD2004D972A /* EventMgr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventMgr.swift; sourceTree = "<group>"; };
+		54CC01B51FBBB59E007FAE3B /* AddItemForSaleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemForSaleViewController.swift; sourceTree = "<group>"; };
+		54CC01B71FC1E5F1007FAE3B /* ItemDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemDetailsViewController.swift; sourceTree = "<group>"; };
+		54CC01B91FC3B9ED007FAE3B /* CartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		54CD74771F7B369D00ACBF46 /* IFirebaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFirebaseService.swift; sourceTree = "<group>"; };
 		54CD74791F7B378B00ACBF46 /* ManagerSuperType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerSuperType.swift; sourceTree = "<group>"; };
 		54CD747B1F7B382700ACBF46 /* FirebaseMgr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseMgr.swift; sourceTree = "<group>"; };
@@ -170,6 +204,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5491EAAE1FC9FEE00089977E /* Social.framework in Frameworks */,
 				54C371641F831064004D972A /* libsqlite3.tbd in Frameworks */,
 				092D45FE0A0F2FBF64081E0A /* Pods_PTAApp.framework in Frameworks */,
 			);
@@ -220,6 +255,14 @@
 				542C28B91F85DABE00871E70 /* MemberSvcSQLite.swift */,
 				54409CE21F866E1B003411D7 /* ISchoolSQLiteSvc.swift */,
 				54409CE41F866E65003411D7 /* SchoolSvcSQLite.swift */,
+				544AB0651F9EB4AF00E2BCE2 /* EventFirebaseDBService.swift */,
+				544AB0671F9EB50400E2BCE2 /* SchoolFirebaseDBService.swift */,
+				544AB0691F9EB74F00E2BCE2 /* ISchoolFirebaseSvc.swift */,
+				54BFF97A1FA36FD100A54F74 /* IEventFirebaseSvc.swift */,
+				545C93F91FAAAE770025477A /* IMemberFirebaseSvc.swift */,
+				545C93FB1FAAAED50025477A /* MemberFirebaseDBService.swift */,
+				544B24CC1FBA9C6400A11276 /* IItemsForSaleFirebaseSvc.swift */,
+				544B24CE1FBA9CC200A11276 /* ItemForSaleFirebaseDBService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -268,7 +311,7 @@
 				549279251F60BE6500BEDAFB /* Assets.xcassets */,
 				549279271F60BE6500BEDAFB /* LaunchScreen.storyboard */,
 				5492792A1F60BE6500BEDAFB /* Info.plist */,
-				5446F7B51F8091B7004EE24D /* GoogleService-Info.plist */,
+				545C93F31FA670BF0025477A /* GoogleService-Info.plist */,
 				54D9E7561F70AE11006AEE86 /* SchoolCreationViewController.swift */,
 				5454D6D31F71FC41001E7EA6 /* SchoolCreateVerifyViewController.swift */,
 				54AF33791F74A13100AC856C /* UserNamePasswordCreateViewController.swift */,
@@ -284,6 +327,10 @@
 				54C371651F83115A004D972A /* PTAApp-Bridging-Header.h */,
 				54409CF21F8C3E9A003411D7 /* AddEventViewController.swift */,
 				54409CF41F8C4414003411D7 /* AddEventVolunteersViewController.swift */,
+				54CC01B51FBBB59E007FAE3B /* AddItemForSaleViewController.swift */,
+				54CC01B71FC1E5F1007FAE3B /* ItemDetailsViewController.swift */,
+				54CC01B91FC3B9ED007FAE3B /* CartViewController.swift */,
+				5491EAAB1FC9FDDC0089977E /* SocialMediaShareViewController.swift */,
 			);
 			path = PTAApp;
 			sourceTree = "<group>";
@@ -339,6 +386,9 @@
 				5446F7B31F807BE4004EE24D /* VolunteerTableViewCell.swift */,
 				54409CF61F8C4AC2003411D7 /* AddVolunteerTableViewCell.swift */,
 				5481AEE11F9458CE00C489EA /* UIApplicationAndExtension.swift */,
+				545C93F51FA7F1330025477A /* SchoolListTableViewCell.swift */,
+				545C93F71FA8081A0025477A /* EventListTableViewCell.swift */,
+				544B24CA1FBA97CC00A11276 /* ItemsCollectionViewCell.swift */,
 			);
 			name = Presentation;
 			sourceTree = "<group>";
@@ -351,6 +401,7 @@
 				54C3717F1F832AD2004D972A /* EventMgr.swift */,
 				542C28BB1F85E0B200871E70 /* MemberMgr.swift */,
 				54409CE61F86756F003411D7 /* SchoolMgr.swift */,
+				544B24D01FBAA18B00A11276 /* ItemForSaleMgr.swift */,
 			);
 			name = Business;
 			sourceTree = "<group>";
@@ -358,6 +409,7 @@
 		6827BE2F4EBFE479D5D258BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5491EAAD1FC9FEE00089977E /* Social.framework */,
 				54C371631F831064004D972A /* libsqlite3.tbd */,
 				2DF8D41B9101169E4E4C8219 /* Pods_PTAApp.framework */,
 				F8FA82CD8B5EA8D42E5EACB4 /* Pods_PTAAppTests.framework */,
@@ -493,9 +545,9 @@
 			files = (
 				549279291F60BE6500BEDAFB /* LaunchScreen.storyboard in Resources */,
 				549279261F60BE6500BEDAFB /* Assets.xcassets in Resources */,
+				545C93F41FA670BF0025477A /* GoogleService-Info.plist in Resources */,
 				549279241F60BE6500BEDAFB /* Main.storyboard in Resources */,
 				54E6EEC61F79F3D40043576F /* Settings.plist in Resources */,
-				5446F7B61F8091B7004EE24D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -659,23 +711,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				542C28B61F85DA1300871E70 /* IEventSQLiteSvc.swift in Sources */,
+				54BFF97B1FA36FD100A54F74 /* IEventFirebaseSvc.swift in Sources */,
 				541162E71F7DE25B0035E425 /* ItemsForSaleListViewController.swift in Sources */,
 				54C371771F83126D004D972A /* EventSvcSQLite.swift in Sources */,
+				54CC01BA1FC3B9ED007FAE3B /* CartViewController.swift in Sources */,
 				54D9E7571F70AE11006AEE86 /* SchoolCreationViewController.swift in Sources */,
 				541162E91F7DE31E0035E425 /* MessageBoardListViewController.swift in Sources */,
 				549279521F60C26100BEDAFB /* Event.swift in Sources */,
+				545C93F61FA7F1330025477A /* SchoolListTableViewCell.swift in Sources */,
 				54E6EEC41F79F15B0043576F /* IService.swift in Sources */,
 				5481AEE21F9458CE00C489EA /* UIApplicationAndExtension.swift in Sources */,
+				545C93FC1FAAAED50025477A /* MemberFirebaseDBService.swift in Sources */,
 				549279211F60BE6500BEDAFB /* ViewController.swift in Sources */,
+				5491EAAC1FC9FDDC0089977E /* SocialMediaShareViewController.swift in Sources */,
+				545C93FA1FAAAE770025477A /* IMemberFirebaseSvc.swift in Sources */,
 				54E6EEC21F79E8F60043576F /* SchoolSelectionViewController.swift in Sources */,
 				541162E31F7DD6ED0035E425 /* SchoolEventListViewController.swift in Sources */,
 				54C371711F83115B004D972A /* FMDatabase.m in Sources */,
 				549279501F60C13700BEDAFB /* School.swift in Sources */,
 				54AF337A1F74A13100AC856C /* UserNamePasswordCreateViewController.swift in Sources */,
+				544B24CF1FBA9CC200A11276 /* ItemForSaleFirebaseDBService.swift in Sources */,
 				54013E771F64C6AB0048B5A1 /* NormalUser.swift in Sources */,
 				54CD747C1F7B382700ACBF46 /* FirebaseMgr.swift in Sources */,
 				542C28B81F85DA6900871E70 /* IMemberSQLiteSvc.swift in Sources */,
 				542C28BA1F85DABE00871E70 /* MemberSvcSQLite.swift in Sources */,
+				545C93F81FA8081A0025477A /* EventListTableViewCell.swift in Sources */,
 				5454D6D41F71FC41001E7EA6 /* SchoolCreateVerifyViewController.swift in Sources */,
 				5446F7B21F80776A004EE24D /* VolunteerListViewController.swift in Sources */,
 				54EC53E91F689D870074630B /* UIViewAndExtenstion.swift in Sources */,
@@ -685,12 +745,20 @@
 				549279561F60C68300BEDAFB /* ItemForSale.swift in Sources */,
 				54AF337C1F74A7ED00AC856C /* RegisterUserViewController.swift in Sources */,
 				54409CE31F866E1B003411D7 /* ISchoolSQLiteSvc.swift in Sources */,
+				544B24CD1FBA9C6400A11276 /* IItemsForSaleFirebaseSvc.swift in Sources */,
 				5492791F1F60BE6500BEDAFB /* AppDelegate.swift in Sources */,
+				544B24CB1FBA97CC00A11276 /* ItemsCollectionViewCell.swift in Sources */,
+				54CC01B61FBBB59E007FAE3B /* AddItemForSaleViewController.swift in Sources */,
+				544B24D11FBAA18B00A11276 /* ItemForSaleMgr.swift in Sources */,
 				54409CF51F8C4414003411D7 /* AddEventVolunteersViewController.swift in Sources */,
+				544AB06A1F9EB74F00E2BCE2 /* ISchoolFirebaseSvc.swift in Sources */,
 				54409CE71F86756F003411D7 /* SchoolMgr.swift in Sources */,
 				542C28BC1F85E0B200871E70 /* MemberMgr.swift in Sources */,
 				5446F7B41F807BE4004EE24D /* VolunteerTableViewCell.swift in Sources */,
+				54CC01B81FC1E5F1007FAE3B /* ItemDetailsViewController.swift in Sources */,
+				544AB0681F9EB50400E2BCE2 /* SchoolFirebaseDBService.swift in Sources */,
 				54409CF31F8C3E9A003411D7 /* AddEventViewController.swift in Sources */,
+				544AB0661F9EB4AF00E2BCE2 /* EventFirebaseDBService.swift in Sources */,
 				54409CE91F86B7D4003411D7 /* CustomActivityIndicator.swift in Sources */,
 				54E6EEC81F79F46C0043576F /* Factory.swift in Sources */,
 				541162E51F7DDA910035E425 /* EventDetailsViewController.swift in Sources */,

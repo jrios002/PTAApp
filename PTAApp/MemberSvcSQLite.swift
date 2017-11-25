@@ -25,7 +25,7 @@ class MemberSvcSQLite: IMemberSQLiteSvc {
             // create the table
             NSLog("Creating Table")
             if (membersDB?.open())! {
-                let sql_stmt = "CREATE TABLE IF NOT EXISTS members (ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT, address TEXT, city TEXT, state TEXT, phone TEXT, email TEXT, adminRights BOOLEAN, ptaTitle TEXT)"
+                let sql_stmt = "CREATE TABLE IF NOT EXISTS members (ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, firstName TEXT, lastName TEXT, address TEXT, city TEXT, state TEXT, phone TEXT, email TEXT, adminRights BOOLEAN, ptaTitle TEXT)"
                 if !((membersDB?.executeStatements(sql_stmt))!) {
                     print("ERROR: \(membersDB?.lastErrorMessage())")
                 }
@@ -44,7 +44,8 @@ class MemberSvcSQLite: IMemberSQLiteSvc {
                     while results?.next() == true {
                         let member = Member()
                         member.id = (results?.longLongInt(forColumn: "ID"))!
-                        member.name = (results?.string(forColumn: "name"))!
+                        member.firstName = (results?.string(forColumn: "firstName"))!
+                        member.lastName = (results?.string(forColumn: "lastName"))!
                         member.address = (results?.string(forColumn: "address"))!
                         member.city = (results?.string(forColumn: "city"))!
                         member.state = (results?.string(forColumn: "state"))!
@@ -55,7 +56,7 @@ class MemberSvcSQLite: IMemberSQLiteSvc {
                     }
                 }
                 else {
-                    let sql_stmt = "CREATE TABLE IF NOT EXISTS members (ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT, address TEXT, city TEXT, state TEXT, phone TEXT, email TEXT, adminRights BOOLEAN, ptaTitle TEXT)"
+                    let sql_stmt = "CREATE TABLE IF NOT EXISTS members (ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, firstName TEXT, lastName TEXT, address TEXT, city TEXT, state TEXT, phone TEXT, email TEXT, adminRights BOOLEAN, ptaTitle TEXT)"
                     if !((membersDB?.executeStatements(sql_stmt))!) {
                         print("ERROR: \(membersDB?.lastErrorMessage())")
                     }
@@ -73,7 +74,7 @@ class MemberSvcSQLite: IMemberSQLiteSvc {
         let membersDB = FMDatabase(path: databasePath! as String)
         
         if (membersDB.open()){
-            let insertSQL = "INSERT INTO members (name, address, city, state, phone, email, adminRights, ptaTitle) VALUES ('\(classType.name!.replacingOccurrences( of: "'", with: "''"))', '\(classType.address!.replacingOccurrences( of: "'", with: "''"))', '\(classType.city!.replacingOccurrences( of: "'", with: "''"))', '\(classType.state!.replacingOccurrences( of: "'", with: "''"))', '\(classType.phone!.replacingOccurrences( of: "'", with: "''"))', '\(classType.email!.replacingOccurrences( of: "'", with: "''"))', '\(classType.adminRights)', '\(classType.ptaTitle!.replacingOccurrences( of: "'", with: "''"))');"
+            let insertSQL = "INSERT INTO members (firstName, lastName, address, city, state, phone, email, adminRights, ptaTitle) VALUES ('\(classType.firstName!.replacingOccurrences( of: "'", with: "''"))', '\(classType.lastName!.replacingOccurrences( of: "'", with: "''"))', '\(classType.address!.replacingOccurrences( of: "'", with: "''"))', '\(classType.city!.replacingOccurrences( of: "'", with: "''"))', '\(classType.state!.replacingOccurrences( of: "'", with: "''"))', '\(classType.phone!.replacingOccurrences( of: "'", with: "''"))', '\(classType.email!.replacingOccurrences( of: "'", with: "''"))', '\(classType.adminRights)', '\(classType.ptaTitle!.replacingOccurrences( of: "'", with: "''"))');"
             
             let result = membersDB.executeUpdate(insertSQL, withArgumentsIn: [])
             
@@ -101,7 +102,7 @@ class MemberSvcSQLite: IMemberSQLiteSvc {
         let membersDB: FMDatabase? = FMDatabase(path: databasePath! as String)
         
         if (membersDB?.open())!{
-            let updateSQL = "UPDATE members SET name = '\(classType.name!.replacingOccurrences( of: "'", with: "''"))', address ='\(classType.address!.replacingOccurrences( of: "'", with: "''"))', city = '\(classType.city!.replacingOccurrences( of: "'", with: "''"))', state = '\(classType.state!.replacingOccurrences( of: "'", with: "''"))', phone = '\(classType.phone!.replacingOccurrences( of: "'", with: "''"))', email = '\(classType.email!.replacingOccurrences( of: "'", with: "''"))', adminRights = '\(classType.adminRights)', ptaTitle = '\(classType.ptaTitle!.replacingOccurrences( of: "'", with: "''"))');"
+            let updateSQL = "UPDATE members SET firstName = '\(classType.firstName!.replacingOccurrences( of: "'", with: "''"))', lastName = '\(classType.lastName!.replacingOccurrences( of: "'", with: "''"))', address ='\(classType.address!.replacingOccurrences( of: "'", with: "''"))', city = '\(classType.city!.replacingOccurrences( of: "'", with: "''"))', state = '\(classType.state!.replacingOccurrences( of: "'", with: "''"))', phone = '\(classType.phone!.replacingOccurrences( of: "'", with: "''"))', email = '\(classType.email!.replacingOccurrences( of: "'", with: "''"))', adminRights = '\(classType.adminRights)', ptaTitle = '\(classType.ptaTitle!.replacingOccurrences( of: "'", with: "''"))');"
             let result = membersDB?.executeUpdate(updateSQL, withArgumentsIn: [])
             if !result! {
                 NSLog("Failed to update member")

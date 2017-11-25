@@ -25,6 +25,18 @@ class Factory {
             
         case "SchoolSvcSQLite":
             return SchoolSvcSQLite()
+            
+        case "SchoolFirebaseDBService":
+            return SchoolFirebaseDBService()
+            
+        case "EventFirebaseDBService":
+            return EventFirebaseDBService()
+            
+        case "MemberFirebaseDBService":
+            return MemberFirebaseDBService()
+            
+        case "ItemForSaleFirebaseDBService":
+            return ItemForSaleFirebaseDBService()
         
         default:
             return FireLoginSvc()

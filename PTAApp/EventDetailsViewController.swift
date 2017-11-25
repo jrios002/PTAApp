@@ -10,9 +10,11 @@ import UIKit
 
 class EventDetailsViewController: UIViewController {
     var event: Event = Event()
-    var location: Int = 0
-    let menuList = ["Home", "Create Event", "Select School", "Log Out"]
+    var deletedEvent: Bool = false
+    let menuList = ["Home", "Create Event", "Select School", "Add Item For Sale", "Edit User Info", "Edit Email Password", "Log Out"]
+    let userList = ["Edit User Info", "Edit Email Password", "Log Out"]
     let menuLauncher: MenuLauncher = MenuLauncher()
+    let userMenu = MenuLauncher()
     
     @IBAction func menuBtn(_ sender: Any) {
         NSLog("entering menu button")
@@ -25,6 +27,10 @@ class EventDetailsViewController: UIViewController {
     @IBOutlet weak var whereTxt: UILabel!
     @IBOutlet weak var timeTxt: UILabel!
     @IBOutlet weak var descTxt: UITextView!
+    
+    @IBAction func guestBtn(_ sender: Any) {
+        userMenu.showMenu(menuList: userList)
+    }
     @IBAction func volunteerBtn(_ sender: Any) {
         performSegue(withIdentifier: "segueToVolunteerList", sender: self)
     }
@@ -34,8 +40,7 @@ class EventDetailsViewController: UIViewController {
     }
     
     @IBAction func deleteBtn(_ sender: Any) {
-        let eventMgr: EventMgr = EventMgr()
-        eventMgr.delete(event)
+        deletedEvent = true
         performSegue(withIdentifier: "unwindFromEventDetails", sender: self)
     }
     
@@ -52,18 +57,45 @@ class EventDetailsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        let eventMgr: EventMgr = EventMgr()
-        var events = [Event]()
-        location = Int(event.id!) - 1
-        events = eventMgr.retrieveAll()
-        event = events[location]
         view.setGradientBackground(colorOne: Colors.orange, colorTwo: Colors.blue, gradientLayer: gradientLayer)
-        titleText.text = event.name
-        whenTxt.text = event.date!
-        timeTxt.text = event.beginTime! + " - " + event.endTime!
-        whereTxt.text = event.location
-        descTxt.text = event.description
-        eventImage.image = #imageLiteral(resourceName: "EventExample")
+        fetchEvent(event: event)
+        let activityInd: CustomActivityIndicator = CustomActivityIndicator()
+        activityInd.customActivityIndicatory(self.view, startAnimate: true).startAnimating()
+        
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+            UIApplication.shared.endIgnoringInteractionEvents()
+            activityInd.customActivityIndicatory(self.view, startAnimate: false).stopAnimating()
+            if (currentMember.firstName?.isEmpty)! {
+                self.guestBtn.title = "Hello Guest"
+            }
+            else {
+                self.guestBtn.title = ("Hello " + currentMember.firstName!)
+            }
+            self.titleText.text = self.event.name
+            self.whenTxt.text = self.event.date!
+            self.timeTxt.text = self.event.beginTime! + " - " + self.event.endTime!
+            self.whereTxt.text = self.event.location
+            self.descTxt.text = self.event.description
+            
+            if let eventImgUrl = self.event.eventImgUrl {
+                let url = URL(string: eventImgUrl)
+                URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
+                    if error != nil {
+                        print(error!)
+                        return
+                    }
+                    
+                    DispatchQueue.main.async(execute: {
+                        self.eventImage.image = UIImage(data: data!)
+                        
+                    })
+                }).resume()
+            }
+        }
+        
+        deletedEvent = false
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -77,11 +109,19 @@ class EventDetailsViewController: UIViewController {
         else if segue.identifier == "segueToEditEvent" {
             NSLog("segueToEditEvent")
             let destination = (segue.destination as? AddEventViewController)
-            destination?.event = event
+            destination?.addEvent = event
             destination?.isUpdatingEvent = true
+        }
+        else if segue.identifier == "unwindFromEventDetails" {
+            let destination = (segue.destination as? SchoolEventListViewController)
+            destination?.deletedEvent = deletedEvent
         }
         
         NSLog("exiting prepareForSegue")
     }
 
+    func fetchEvent(event: Event) {
+        let eventMgr: EventMgr = EventMgr()
+        self.event = eventMgr.getEvent(event.name!, school: selectedSchool)
+    }
 }

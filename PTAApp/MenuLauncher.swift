@@ -34,7 +34,7 @@ class MenuLauncher: NSObject, UITableViewDelegate, UITableViewDataSource {
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.blackView.alpha = 1
                 
-                self.menuTableView.frame = CGRect(x: 0, y: 16, width: 150, height: window.frame.height)
+                self.menuTableView.frame = CGRect(x: 0, y: 16, width: 250, height: window.frame.height)
             }, completion: nil)
         }
     }

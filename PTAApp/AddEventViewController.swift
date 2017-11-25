@@ -8,47 +8,95 @@
 
 import UIKit
 
-class AddEventViewController: UIViewController {
-    var event: Event = Event()
-    let menuList = ["Home", "Select School", "Log Out"]
+class AddEventViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    var addEvent: Event = Event()
+    let menuList = ["Home", "Select School", "Add Item For Sale", "Edit User Info", "Edit Email Password", "Log Out"]
+    let userList = ["Edit User Info", "Edit Email Password", "Log Out"]
     var isUpdatingEvent: Bool = false
 
+    @IBOutlet weak var guestBtn: UIBarButtonItem!
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var date: UITextField!
     @IBOutlet weak var timeBegin: UITextField!
     @IBOutlet weak var timeEnd: UITextField!
     @IBOutlet weak var location: UITextField!
     @IBOutlet weak var descText: UITextView!
+    @IBOutlet weak var eventImage: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    
     let menuLauncher: MenuLauncher = MenuLauncher()
+    let userMenu = MenuLauncher()
+    
+    @IBAction func guestBtn(_ sender: Any) {
+        userMenu.showMenu(menuList: userList)
+    }
     
     @IBAction func menuBar(_ sender: Any) {
         NSLog("entering menu button")
         menuLauncher.showMenu(menuList: menuList)
     }
+    
     @IBAction func cancelBtn(_ sender: Any) {
         self.performSegue(withIdentifier: "unwindFromAddEvent", sender: self)
     }
     
     @IBAction func nextBtn(_ sender: Any) {
-        event.name = name.text
-        event.date = date.text
-        event.beginTime = timeBegin.text
-        event.endTime = timeEnd.text
-        event.location = location.text
-        event.description = descText.text
+        if isUpdatingEvent {
+            let eventMgr: EventMgr = EventMgr()
+            eventMgr.delete(addEvent, school: selectedSchool)
+        }
+        addEvent.name = name.text
+        addEvent.date = date.text
+        addEvent.beginTime = timeBegin.text
+        addEvent.endTime = timeEnd.text
+        addEvent.location = location.text
+        addEvent.description = descText.text
+        if eventImage.image == #imageLiteral(resourceName: "emptyImage2") {
+            addEvent.eventImage = #imageLiteral(resourceName: "noImage")
+        }
+        else {
+            addEvent.eventImage = eventImage.image
+        }
+        
         performSegue(withIdentifier: "segueToAddVolunteers", sender: self)
     }
     
     let gradientLayer = CAGradientLayer()
     override func viewDidLoad() {
         super.viewDidLoad()
+        eventImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectEventImageView)))
+        eventImage.isUserInteractionEnabled = true
+        if (currentMember.firstName?.isEmpty)! {
+            guestBtn.title = "Hello Guest"
+        }
+        else {
+            guestBtn.title = ("Hello " + currentMember.firstName!)
+        }
         if isUpdatingEvent {
-            name.text = event.name
-            date.text = event.date
-            timeBegin.text = event.beginTime
-            timeEnd.text = event.endTime
-            location.text = event.location
-            descText.text = event.description
+            titleLabel.text = "Update Event"
+            name.text = addEvent.name
+            date.text = addEvent.date
+            timeBegin.text = addEvent.beginTime
+            timeEnd.text = addEvent.endTime
+            location.text = addEvent.location
+            descText.text = addEvent.description
+            if let eventImgUrl = addEvent.eventImgUrl {
+                let url = URL(string: eventImgUrl)
+                URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
+                    if error != nil {
+                        print(error!)
+                        return
+                    }
+                    
+                    DispatchQueue.main.async(execute: {
+                        self.eventImage.image = UIImage(data: data!)
+                    })
+                }).resume()
+            }
+        }
+        else {
+            titleLabel.text = "Add Event"
+            eventImage.image = #imageLiteral(resourceName: "emptyImage2")
         }
         createDatePicker()
         createToolbar()
@@ -115,13 +163,38 @@ class AddEventViewController: UIViewController {
         timeEnd.text = timeFormatter.string(from: sender.date)
     }
     
+    func handleSelectEventImageView() {
+        let picker = UIImagePickerController()
+        
+        picker.delegate = self
+        picker.allowsEditing = true
+        present(picker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        var selectedImageFromPicker: UIImage?
+        
+        if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
+            selectedImageFromPicker = editedImage
+        }
+        else if let originalImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+            selectedImageFromPicker = originalImage
+        }
+        
+        if let selectedImage = selectedImageFromPicker {
+            eventImage.image = selectedImage
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         NSLog("entering prepareForSegue")
         
         if segue.identifier == "segueToAddVolunteers" {
             NSLog("segueToAddVolunteers")
             let destination = (segue.destination as? AddEventVolunteersViewController)
-            destination?.event = event
+            destination?.updateEvent = addEvent
             destination?.isUpdating = isUpdatingEvent
         }
         

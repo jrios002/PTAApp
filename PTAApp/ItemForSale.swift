@@ -13,5 +13,17 @@ class ItemForSale{
     var name: String?
     var cost: Float?
     var description: String?
-    var image: UIImage?
+    var itemImage: UIImage?
+    var itemImageUrl: String?
+    
+    init() {
+        name = ""
+        cost = 0
+        description = ""
+        itemImageUrl = ""
+    }
+    
+    func GetDescription() -> String {
+        return name! + "::" + description! + "::" + itemImageUrl!
+    }
 }

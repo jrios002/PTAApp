@@ -10,7 +10,8 @@ import Foundation
 
 class Member {
     var id: Int64?
-    var name: String?
+    var firstName: String?
+    var lastName: String?
     var address: String?
     var city: String?
     var state: String?
@@ -18,9 +19,24 @@ class Member {
     var email: String?
     var adminRights: Bool?
     var ptaTitle: String?
+    var schoolAdmin: String?
+    
+    init() {
+        id = 0
+        firstName = ""
+        lastName = ""
+        address = ""
+        city = ""
+        state = ""
+        phone = ""
+        email = ""
+        adminRights = false
+        ptaTitle = ""
+        schoolAdmin = ""
+    }
     
     func GetDescription() -> String {
         let adminRightToString: String? = adminRights?.description
-        return name! + "::" + address! + "::" + city! + "::" + phone! + "::" + email! + "::" + ptaTitle! + "::" + adminRightToString!
+        return firstName! + "::" + lastName! + "::" + address! + "::" + city! + "::" + phone! + "::" + email! + "::" + ptaTitle! + "::" + adminRightToString!
     }
 }

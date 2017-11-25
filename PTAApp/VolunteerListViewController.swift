@@ -8,15 +8,40 @@
 
 import UIKit
 
-class VolunteerListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class VolunteerListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     var event: Event = Event()
-    let menuList = ["Home", "Create Event", "Select School", "Log Out"]
+    var oldEvent: Event = Event()
+    var volunteers = [String]()
+    private var currentTextField: UITextField?
+    let menuList = ["Home", "Create Event", "Select School", "Add Item For Sale", "Edit User Info", "Edit Email Password", "Log Out"]
+    let userList = ["Edit User Info", "Edit Email Password", "Log Out"]
     let menuLauncher: MenuLauncher = MenuLauncher()
+    let userMenu = MenuLauncher()
     
+    @IBOutlet weak var guestBtn: UIBarButtonItem!
     @IBOutlet weak var myTableView: UITableView!
     @IBOutlet weak var eventTitle: UILabel!
     
+    @IBAction func guestBtn(_ sender: Any) {
+        userMenu.showMenu(menuList: userList)
+    }
+    
     @IBAction func signUpBtn(_ sender: Any) {
+        if let currentTextField = currentTextField {
+            currentTextField.resignFirstResponder()
+        }
+        let eventMgr: EventMgr = EventMgr()
+        eventMgr.update(event, oldEvent, school: selectedSchool)
+        let activityInd: CustomActivityIndicator = CustomActivityIndicator()
+        activityInd.customActivityIndicatory(self.view, startAnimate: true).startAnimating()
+        
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+            UIApplication.shared.endIgnoringInteractionEvents()
+            activityInd.customActivityIndicatory(self.view, startAnimate: false).stopAnimating()
+            self.performSegue(withIdentifier: "unwindFromVolunteerList", sender: self)
+        }
     }
     
     @IBAction func editSpotsBtn(_ sender: Any) {
@@ -36,18 +61,25 @@ class VolunteerListViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     let gradientLayer = CAGradientLayer()
-
-    override func viewDidLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        gradientLayer.frame = view.layer.bounds
-        view.setGradientBackground(colorOne: Colors.orange, colorTwo: Colors.blue, gradientLayer: gradientLayer)
-    }
     
     override func viewWillAppear(_ animated: Bool) {
+        oldEvent = event
+        if (currentMember.firstName?.isEmpty)! {
+            guestBtn.title = "Hello Guest"
+        }
+        else {
+            guestBtn.title = ("Hello " + currentMember.firstName!)
+        }
         myTableView.backgroundColor = UIColor.clear
         view.setGradientBackground(colorOne: Colors.orange, colorTwo: Colors.blue, gradientLayer: gradientLayer)
         eventTitle.text = event.name
         myTableView.reloadData()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        gradientLayer.frame = view.layer.bounds
+        view.setGradientBackground(colorOne: Colors.orange, colorTwo: Colors.blue, gradientLayer: gradientLayer)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -56,10 +88,11 @@ class VolunteerListViewController: UIViewController, UITableViewDataSource, UITa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! VolunteerTableViewCell
-        
+        cell.nameTxt.text = event.volunteers?[indexPath.row]
         cell.timeText.text = ((event.volunteersBeginTime?[indexPath.row])! + " - " + (event.volunteersEndTime?[indexPath.row])!)
         cell.backgroundColor = UIColor.clear
-        
+        cell.nameTxt.addTarget(self, action: #selector(textChange(textField:)), for: UIControlEvents.allEvents)
+        cell.selectBtn.addTarget(self, action: #selector(selectBtnClicked(sender:)), for: UIControlEvents.touchUpInside)
         return cell
     }
 
@@ -69,8 +102,7 @@ class VolunteerListViewController: UIViewController, UITableViewDataSource, UITa
             event.volunteersBeginTime?.remove(at: indexPath.row)
             event.volunteersEndTime?.remove(at: indexPath.row)
             let eventMgr: EventMgr = EventMgr()
-            let location: Int = Int(event.id!)
-            eventMgr.update(event, index: location)
+            eventMgr.update(event, oldEvent, school: selectedSchool)
             myTableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
             myTableView.setEditing(false, animated: true)
         }
@@ -86,10 +118,27 @@ class VolunteerListViewController: UIViewController, UITableViewDataSource, UITa
         if segue.identifier == "segueToEditVolunteerSlots" {
             NSLog("segueToEditVolunteerSlots")
             let destination = (segue.destination as? AddEventVolunteersViewController)
-            destination?.event = event
+            destination?.updateEvent = event
             destination?.isUpdating = true
+            destination?.isUpdatingVolunteers = true
         }
         
         NSLog("exiting prepareForSegue")
+    }
+    
+    func textChange(textField: UITextField) {
+        let cellIndexPath = myTableView.indexPath(for: textField.superview!.superview! as! UITableViewCell)
+        
+        let cell = myTableView.cellForRow(at: cellIndexPath!) as! VolunteerTableViewCell
+        let index: Int = (cellIndexPath?.row)!
+        event.volunteers?[index] = cell.nameTxt.text!
+    }
+    
+    func selectBtnClicked(sender: Any) {
+        let cellIndexPath = myTableView.indexPath(for: (sender as AnyObject).superview!?.superview! as! UITableViewCell)
+        
+        let cell = myTableView.cellForRow(at: cellIndexPath!) as! VolunteerTableViewCell
+        let index: Int = (cellIndexPath?.row)!
+        event.volunteers?[index] = cell.nameTxt.text!
     }
 }

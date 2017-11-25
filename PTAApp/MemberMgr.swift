@@ -11,43 +11,51 @@ import Foundation
 class MemberMgr: ManagerSuperType {
     func create (_ classType: Member) {
         let factory: Factory! = Factory()
-        let memberSvc: IMemberSQLiteSvc! = (factory.getService(serviceName: "MemberSvcSQLiteImpl") as? IMemberSQLiteSvc)
+        let memberSvc: IMemberFirebaseSvc! = (factory.getService(serviceName: "MemberSvcFirebaseImpl") as? IMemberFirebaseSvc)
         memberSvc.create(classType)
     }
     
     func retrieveAll () -> [Member] {
         let factory: Factory! = Factory()
-        let memberSvc: IMemberSQLiteSvc! = (factory.getService(serviceName: "MemberSvcSQLiteImpl") as? IMemberSQLiteSvc)
+        let memberSvc: IMemberFirebaseSvc! = (factory.getService(serviceName: "MemberSvcFirebaseImpl") as? IMemberFirebaseSvc)
         let members = memberSvc.retrieveAll()
         
         return members
     }
     
-    func update (_ classType: Member, index: Int) {
+    func update (_ classType: Member) {
         let factory: Factory! = Factory()
-        let memberSvc: IMemberSQLiteSvc! = (factory.getService(serviceName: "MemberSvcSQLiteImpl") as? IMemberSQLiteSvc)
-        memberSvc.update(classType, index: index)
+        let memberSvc: IMemberFirebaseSvc! = (factory.getService(serviceName: "MemberSvcFirebaseImpl") as? IMemberFirebaseSvc)
+        memberSvc.update(classType)
     }
     
     func delete (_ classType: Member) {
         let factory: Factory! = Factory()
-        let memberSvc: IMemberSQLiteSvc! = (factory.getService(serviceName: "MemberSvcSQLiteImpl") as? IMemberSQLiteSvc)
+        let memberSvc: IMemberFirebaseSvc! = (factory.getService(serviceName: "MemberSvcFirebaseImpl") as? IMemberFirebaseSvc)
         memberSvc.delete(classType)
     }
     
     func getCount() -> Int {
         let factory: Factory! = Factory()
-        let memberSvc: IMemberSQLiteSvc! = (factory.getService(serviceName: "MemberSvcSQLiteImpl") as? IMemberSQLiteSvc)
+        let memberSvc: IMemberFirebaseSvc! = (factory.getService(serviceName: "MemberSvcFirebaseImpl") as? IMemberFirebaseSvc)
         let count = memberSvc.getCount()
         
         return count
     }
     
-    func getEvent(_ index: Int) -> Member {
+    func getMember(_ email: String) -> Member {
         let factory: Factory! = Factory()
-        let memberSvc: IMemberSQLiteSvc! = (factory.getService(serviceName: "MemberSvcSQLiteImpl") as? IMemberSQLiteSvc)
-        let member: Member = memberSvc.getMember(index)
+        let memberSvc: IMemberFirebaseSvc! = (factory.getService(serviceName: "MemberSvcFirebaseImpl") as? IMemberFirebaseSvc)
+        let member: Member = memberSvc.getMember(email)
         
         return member
+    }
+    
+    func getMessage() -> String {
+        let factory: Factory! = Factory()
+        let memberSvc: IMemberFirebaseSvc! = (factory.getService(serviceName: "MemberSvcFirebaseImpl") as? IMemberFirebaseSvc)
+        let message = memberSvc.retrieveMessage()
+        
+        return message
     }
 }

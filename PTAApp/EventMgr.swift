@@ -9,45 +9,53 @@
 import Foundation
 
 class EventMgr: ManagerSuperType {
-    func create (_ classType: Event) {
+    func create (_ classType: Event, school: School) {
         let factory: Factory! = Factory()
-        let eventSvc: IEventSQLiteSvc! = (factory.getService(serviceName: "EventSvcSQLiteImpl") as? IEventSQLiteSvc)
-        eventSvc.create(classType)
+        let eventSvc: IEventFirebaseSvc! = (factory.getService(serviceName: "EventSvcFirebaseImpl") as? IEventFirebaseSvc)
+        eventSvc.create(classType, school: school)
     }
     
     func retrieveAll () -> [Event] {
         let factory: Factory! = Factory()
-        let eventSvc: IEventSQLiteSvc! = (factory.getService(serviceName: "EventSvcSQLiteImpl") as? IEventSQLiteSvc)
+        let eventSvc: IEventFirebaseSvc! = (factory.getService(serviceName: "EventSvcFirebaseImpl") as? IEventFirebaseSvc)
         let events = eventSvc.retrieveAll()
         
         return events 
     }
     
-    func update (_ classType: Event, index: Int) {
+    func update (_ classType: Event, _ oldClassType: Event, school: School) {
         let factory: Factory! = Factory()
-        let eventSvc: IEventSQLiteSvc! = (factory.getService(serviceName: "EventSvcSQLiteImpl") as? IEventSQLiteSvc)
-        eventSvc.update(classType, index: index)
+        let eventSvc: IEventFirebaseSvc! = (factory.getService(serviceName: "EventSvcFirebaseImpl") as? IEventFirebaseSvc)
+        eventSvc.update(classType, oldClassType, school: school)
     }
     
-    func delete (_ classType: Event) {
+    func delete (_ classType: Event, school: School) {
         let factory: Factory! = Factory()
-        let eventSvc: IEventSQLiteSvc! = (factory.getService(serviceName: "EventSvcSQLiteImpl") as? IEventSQLiteSvc)
-        eventSvc.delete(classType)
+        let eventSvc: IEventFirebaseSvc! = (factory.getService(serviceName: "EventSvcFirebaseImpl") as? IEventFirebaseSvc)
+        eventSvc.delete(classType, school: school)
     }
     
     func getCount() -> Int {
         let factory: Factory! = Factory()
-        let eventSvc: IEventSQLiteSvc! = (factory.getService(serviceName: "EventSvcSQLiteImpl") as? IEventSQLiteSvc)
+        let eventSvc: IEventFirebaseSvc! = (factory.getService(serviceName: "EventSvcFirebaseImpl") as? IEventFirebaseSvc)
         let count = eventSvc.getCount()
         
         return count
     }
     
-    func getEvent(_ index: Int) -> Event {
+    func getEvent(_ name: String, school: School) -> Event {
         let factory: Factory! = Factory()
-        let eventSvc: IEventSQLiteSvc! = (factory.getService(serviceName: "EventSvcSQLiteImpl") as? IEventSQLiteSvc)
-        let event: Event = eventSvc.getEvent(index) 
+        let eventSvc: IEventFirebaseSvc! = (factory.getService(serviceName: "EventSvcFirebaseImpl") as? IEventFirebaseSvc)
+        let event: Event = eventSvc.getEvent(name, school: school)
         
         return event
+    }
+    
+    func getMessage() -> String {
+        let factory: Factory! = Factory()
+        let eventSvc: IEventFirebaseSvc! = (factory.getService(serviceName: "EventSvcFirebaseImpl") as? IEventFirebaseSvc)
+        let message = eventSvc.retrieveMessage()
+        
+        return message
     }
 }

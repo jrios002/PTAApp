@@ -11,9 +11,12 @@ import FirebaseAuth
 
 class UserNamePasswordCreateViewController: UIViewController {
     
+    var isUpdating: Bool = false
+    
     @IBOutlet weak var usernameText: UITextField!
     @IBOutlet weak var passwordText: UITextField!
     @IBOutlet weak var passwordVerifyText: UITextField!
+    @IBOutlet weak var nextBtn: UIButton!
     
     @IBAction func backBtn(_ sender: Any) {
         NSLog("entering back button")
@@ -27,29 +30,90 @@ class UserNamePasswordCreateViewController: UIViewController {
             if usernameText.text != "" && passwordText.text != ""
             {
                 let firebaseMgr: FirebaseMgr = FirebaseMgr()
-                firebaseMgr.emailSignUp(email: usernameText.text!, password: passwordText.text!)
-                let activityInd: CustomActivityIndicator = CustomActivityIndicator()
-                activityInd.customActivityIndicatory(self.view, startAnimate: true).startAnimating()
                 
-                UIApplication.shared.beginIgnoringInteractionEvents()
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    message = firebaseMgr.getMessage()
-                    print("\(message)")
-                    if message == "SUCCESS" {
-                        UIApplication.shared.endIgnoringInteractionEvents()
-                        activityInd.customActivityIndicatory(self.view, startAnimate: false).stopAnimating()
-                        self.performSegue(withIdentifier: "segueToRegisterUser", sender: self)
-                    } else {
-                        UIApplication.shared.endIgnoringInteractionEvents()
-                        activityInd.customActivityIndicatory(self.view, startAnimate: false).stopAnimating()
-                        let loginAlert = UIAlertController(title: "Sign Up Failed!!", message: "Please Verify that a valid email address is entered AND Password is at least 6 characters long!!", preferredStyle: UIAlertControllerStyle.alert)
-                        
-                        loginAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-                            print("Exiting from alert")
-                        }))
-                        
-                        self.present(loginAlert, animated: true, completion: nil)
+                if isUpdating {
+                    let user = FIRAuth.auth()?.currentUser
+                    if let user = user {
+                        user.updateEmail(usernameText.text!, completion: { (error) in
+                            if let error = error {
+                                print(error)
+                            }
+                            else {
+                                print("SUCCESS updating email")
+                            }
+                        })
+                        user.updatePassword(passwordText.text!, completion: { (error) in
+                            if let error = error {
+                                print(error)
+                            }
+                            else {
+                                print("SUCCESS updating password")
+                            }
+                        })
+                    }
+                    let memberMgr: MemberMgr = MemberMgr()
+                    memberMgr.delete(currentMember)
+                    let activityInd: CustomActivityIndicator = CustomActivityIndicator()
+                    activityInd.customActivityIndicatory(self.view, startAnimate: true).startAnimating()
+                    
+                    UIApplication.shared.beginIgnoringInteractionEvents()
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        message = firebaseMgr.getMessage()
+                        print("\(message)")
+                        if message == "SUCCESS" {
+                            UIApplication.shared.endIgnoringInteractionEvents()
+                            activityInd.customActivityIndicatory(self.view, startAnimate: false).stopAnimating()
+                            currentMember.email = self.usernameText.text
+                            memberMgr.create(currentMember)
+                            let updateAlert = UIAlertController(title: "SUCCESS!!", message: "Log in credentials successfully updated!!", preferredStyle: UIAlertControllerStyle.alert)
+                            
+                            updateAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                                print("Exiting from alert")
+                                self.performSegue(withIdentifier: "unwindFromUserNameCreate", sender: self)
+                            }))
+                            
+                            self.present(updateAlert, animated: true, completion: nil)
+                        }
+                        else {
+                            UIApplication.shared.endIgnoringInteractionEvents()
+                            activityInd.customActivityIndicatory(self.view, startAnimate: false).stopAnimating()
+                            let updateAlert = UIAlertController(title: "ERROR!!", message: "Unable to update your credentials!!/nPlease try again later!", preferredStyle: UIAlertControllerStyle.alert)
+                            
+                            updateAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                                print("Exiting from alert")
+                                self.performSegue(withIdentifier: "unwindFromUserNameCreate", sender: self)
+                            }))
+                            
+                            self.present(updateAlert, animated: true, completion: nil)
+                        }
+                    }
+                }
+                else {
+                    firebaseMgr.emailSignUp(email: usernameText.text!, password: passwordText.text!)
+                    let activityInd: CustomActivityIndicator = CustomActivityIndicator()
+                    activityInd.customActivityIndicatory(self.view, startAnimate: true).startAnimating()
+                    
+                    UIApplication.shared.beginIgnoringInteractionEvents()
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        message = firebaseMgr.getMessage()
+                        print("\(message)")
+                        if message == "SUCCESS" {
+                            UIApplication.shared.endIgnoringInteractionEvents()
+                            activityInd.customActivityIndicatory(self.view, startAnimate: false).stopAnimating()
+                            self.performSegue(withIdentifier: "segueToRegisterUser", sender: self)
+                        } else {
+                            UIApplication.shared.endIgnoringInteractionEvents()
+                            activityInd.customActivityIndicatory(self.view, startAnimate: false).stopAnimating()
+                            let loginAlert = UIAlertController(title: "Sign Up Failed!!", message: "Please Verify that a valid email address is entered AND Password is at least 6 characters long!!", preferredStyle: UIAlertControllerStyle.alert)
+                            
+                            loginAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                                print("Exiting from alert")
+                            }))
+                            
+                            self.present(loginAlert, animated: true, completion: nil)
+                        }
                     }
                 }
             }
@@ -74,9 +138,17 @@ class UserNamePasswordCreateViewController: UIViewController {
     
     
     let gradientLayer = CAGradientLayer()
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    override func viewWillAppear(_ animated: Bool) {
         view.setGradientBackground(colorOne: Colors.orange, colorTwo: Colors.blue, gradientLayer: gradientLayer)
+        if currentMember.firstName != "" {
+            isUpdating = true
+            nextBtn.setTitle("Update", for: .normal)
+        }
+        else {
+            isUpdating = false
+            nextBtn.setTitle("Next", for: .normal)
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -90,6 +162,7 @@ class UserNamePasswordCreateViewController: UIViewController {
         let destination = (segue.destination as? RegisterUserViewController)
         if segue.identifier == "segueToRegisterUser" {
             destination?.seguedEmail = usernameText.text!
+            destination?.seguedPassword = passwordVerifyText.text!
         }
         NSLog("exiting prepare for segue")
     }

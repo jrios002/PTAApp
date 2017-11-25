@@ -7,10 +7,19 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class MessageBoardListViewController: UIViewController {
-    let menuList = ["Home", "Create Event", "Select School", "Log Out"]
+    let menuList = ["Home", "Create Event", "Select School", "Add Item For Sale", "Edit User Info", "Edit Email Password", "Log Out"]
+    let userList = ["Edit User Info", "Edit Email Password", "Log Out"]
     let menuLauncher: MenuLauncher = MenuLauncher()
+    let userMenu = MenuLauncher()
+    
+    @IBOutlet weak var guestBtn: UIBarButtonItem!
+    
+    @IBAction func guestBtn(_ sender: Any) {
+        userMenu.showMenu(menuList: userList)
+    }
     
     @IBAction func menuBar(_ sender: Any) {
         NSLog("entering menu button")
@@ -19,9 +28,21 @@ class MessageBoardListViewController: UIViewController {
     @IBOutlet weak var userNameTxt: UITextField!
     
     let gradientLayer = CAGradientLayer()
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    override func viewWillAppear(_ animated: Bool) {
         view.setGradientBackground(colorOne: Colors.orange, colorTwo: Colors.blue, gradientLayer: gradientLayer)
+        if (currentMember.firstName?.isEmpty)! {
+            guestBtn.title = "Hello Guest"
+        }
+        else {
+            guestBtn.title = ("Hello " + currentMember.firstName!)
+        }
+        
+        let user = FIRAuth.auth()?.currentUser
+        if user != nil {
+            userNameTxt.text = currentMember.firstName
+            performSegue(withIdentifier: "segueToMessages", sender: self)
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -33,7 +54,7 @@ class MessageBoardListViewController: UIViewController {
     @IBAction func signInBtn(_ sender: Any) {
         let firebaseMgr: FirebaseMgr = FirebaseMgr()
         firebaseMgr.anonSignIn()
-        self.performSegue(withIdentifier: "segueToMessages", sender: nil)
+        self.performSegue(withIdentifier: "segueToMessages", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

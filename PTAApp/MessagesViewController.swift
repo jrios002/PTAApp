@@ -11,16 +11,25 @@ import Firebase
 
 class MessagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
 
+    @IBOutlet weak var guestBtn: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
-    let menuList = ["Home", "Create Event", "Select School", "Log Out"]
+    let menuList = ["Home", "Create Event", "Select School", "Add Item For Sale", "Edit User Info", "Edit Email Password", "Log Out"]
+    let userList = ["Edit User Info", "Edit Email Password", "Log Out"]
     let menuLauncher: MenuLauncher = MenuLauncher()
+    let userMenu = MenuLauncher()
     
     var chatRef: FIRDatabaseReference!
-    var msse652: FIRDatabaseHandle!
+    var chatHandle: FIRDatabaseHandle!
     var messages = [String]()
     var userName: String = ""
+    var schoolRef: String = ""
     
     @IBOutlet weak var chatTxt: UITextField!
+    
+    @IBAction func guestBtn(_ sender: Any) {
+        userMenu.showMenu(menuList: userList)
+    }
+    
     @IBAction func menuBar(_ sender: Any) {
         NSLog("entering menu button")
         menuLauncher.showMenu(menuList: menuList)
@@ -28,7 +37,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBAction func sendBtn(_ sender: Any) {
         let message = chatTxt.text
         if message != "" {
-            chatRef.child("MSSE 692").childByAutoId().setValue(userName + " posted: " + message!)
+            chatRef.child("schoolList").child(schoolRef).child("chatList").setValue(userName + " posted: " + message!)
             chatTxt.text = ""
         }
     }
@@ -48,6 +57,13 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
     let gradientLayer = CAGradientLayer()
     override func viewDidLoad() {
         super.viewDidLoad()
+        schoolRef = (selectedSchool.name?.lowercased())! + selectedSchool.zipCode!
+        if (currentMember.firstName?.isEmpty)! {
+            guestBtn.title = "Hello Guest"
+        }
+        else {
+            guestBtn.title = ("Hello " + currentMember.firstName!)
+        }
         tableView.backgroundColor = UIColor.clear
         view.setGradientBackground(colorOne: Colors.orange, colorTwo: Colors.blue, gradientLayer: gradientLayer)
         loadTable()
@@ -62,8 +78,8 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func loadTable() {
         NSLog("Entering loadTable")
-        chatRef = FIRDatabase.database().reference(withPath: "chat")
-        msse652 = chatRef.child("MSSE 692").observe(.value, with: { snapshot in
+        chatRef = FIRDatabase.database().reference()
+        chatHandle = chatRef.child("schoolList").child(schoolRef).child("chatList").observe(.value, with: { snapshot in
             self.messages = [String]()
             for item in snapshot.children {
                 let child = item as! FIRDataSnapshot
@@ -81,7 +97,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         textField.resignFirstResponder()
         let message = chatTxt.text
         if message != "" {
-            chatRef.child("MSSE 692").childByAutoId().setValue(userName + " posted: " + message!)
+            chatRef.child("schoolList").child(schoolRef).child("chatList").childByAutoId().setValue(userName + " posted: " + message!)
             chatTxt.text = ""
         }
         return true

@@ -19,7 +19,6 @@ class FireLoginSvc: IFirebaseService {
     required init () {
         email = ""
         password = ""
-        try! FIRAuth.auth()!.signOut()
     }
     
     func loginUser (email: String, password: String) -> Void {
