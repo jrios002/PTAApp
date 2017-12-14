@@ -46,6 +46,7 @@ class AddItemForSaleViewController: UIViewController, UIImagePickerControllerDel
                 print("Exiting from alert")
             }))
             
+            self.dismissKeyboard()
             self.present(updateAlert, animated: true, completion: nil)
         }
         else {
@@ -89,6 +90,9 @@ class AddItemForSaleViewController: UIViewController, UIImagePickerControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         view.setGradientBackground(colorOne: Colors.orange, colorTwo: Colors.blue, gradientLayer: gradientLayer)
+        cost.keyboardType = UIKeyboardType.numberPad
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AddItemForSaleViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
         if isUpdating {
             titleLabel.text = "Update Item For Sale"
             uploadItemBtn.setTitle("Update Item", for: .normal)
@@ -147,5 +151,9 @@ class AddItemForSaleViewController: UIViewController, UIImagePickerControllerDel
         if let amountString = textField.text?.currencyInputFormatting() {
             textField.text = amountString
         }
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

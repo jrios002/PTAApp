@@ -12,10 +12,13 @@ import Firebase
 var selectedSchool: School = School()
 var currentMember: Member = Member()
 
-class SchoolSelectionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SchoolSelectionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
     var school: School = School()
+    var schoolFilter: School = School()
     var schools = [School]()
+    var filteredSchool = [School]()
+    var isSearching: Bool = false
     var message: String = ""
     let menuLauncher = MenuLauncher()
     let userMenu = MenuLauncher()
@@ -24,22 +27,8 @@ class SchoolSelectionViewController: UIViewController, UITableViewDelegate, UITa
     var guestName: String = ""
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var selectedSchoolText: UITextField!
     @IBOutlet weak var userName: UIBarButtonItem!
-    @IBAction func selectSchoolBtn(_ sender: Any) {
-        if selectedSchoolText.text != "" {
-            performSegue(withIdentifier: "segueToEventList", sender: self)
-        }
-        else {
-            let selectAlert = UIAlertController(title: "School selection error!", message: "Please Select a school to continue.", preferredStyle: UIAlertControllerStyle.alert)
-            
-            selectAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-                print("Exiting from alert")
-            }))
-            
-            present(selectAlert, animated: true, completion: nil)
-        }
-    }
+    @IBOutlet weak var searchBar: UISearchBar!
     
     @IBAction func MenuButton(_ sender: Any) {
         NSLog("entering menu button")
@@ -57,6 +46,8 @@ class SchoolSelectionViewController: UIViewController, UITableViewDelegate, UITa
     
     override func viewWillAppear(_ animated: Bool) {
         tableView.backgroundColor = UIColor.clear
+        searchBar.delegate = self
+        searchBar.returnKeyType = UIReturnKeyType.done
         
         currentMember = fetchUserInfo()
         let activityInd: CustomActivityIndicator = CustomActivityIndicator()
@@ -88,12 +79,23 @@ class SchoolSelectionViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return schools.count
+        if isSearching {
+            return filteredSchool.count
+        }
+        else {
+            return schools.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SchoolListTableViewCell
-        self.school = self.schools[indexPath.row]
+        
+        if isSearching {
+            self.school = self.filteredSchool[indexPath.row]
+        }
+        else {
+            self.school = self.schools[indexPath.row]
+        }
         cell.backgroundColor = UIColor.clear
         cell.schoolName.text = school.name
         cell.schoolImage.image = school.schoolImage
@@ -101,9 +103,34 @@ class SchoolSelectionViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.school = self.schools[indexPath.row]
-        selectedSchoolText.text = school.name
+        if isSearching {
+            self.school = self.filteredSchool[indexPath.row]
+        }
+        else {
+            self.school = self.schools[indexPath.row]
+        }
+        
         selectedSchool = self.school
+        performSegue(withIdentifier: "segueToEventList", sender: self)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text == nil || searchBar.text == "" {
+            isSearching = false
+            
+            view.endEditing(true)
+            
+            tableView.reloadData()
+        }
+        else {
+            isSearching = true
+            
+            filteredSchool = schools.filter({ (schoolFound) -> Bool in
+                (schoolFound.name?.contains(searchBar.text!))!
+            })
+            
+            tableView.reloadData()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -37,6 +37,9 @@ class Factory {
             
         case "ItemForSaleFirebaseDBService":
             return ItemForSaleFirebaseDBService()
+            
+        case "MemberCartItemFirebaseDBService":
+            return MemberCartItemFirebaseDBService()
         
         default:
             return FireLoginSvc()

@@ -11,7 +11,7 @@ import Firebase
 import FBSDKLoginKit
 import GoogleSignIn
 
-class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInDelegate, GIDSignInUIDelegate {
+class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInDelegate, GIDSignInUIDelegate, UITextFieldDelegate {
     
     let fbLoginBtn = FBSDKLoginButton()
     let googleBtn = GIDSignInButton()
@@ -87,6 +87,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         try! FIRAuth.auth()!.signOut()
         let loginManager = FBSDKLoginManager()
         loginManager.logOut()
@@ -103,6 +104,9 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInDeleg
         let newSessionMember: Member = Member()
         currentMember = newSessionMember
         view.setGradientBackground(colorOne: Colors.orange, colorTwo: Colors.blue, gradientLayer: gradientLayer)
+        createToolbar()
+        self.usernameText.delegate = self
+        self.passwordText.delegate = self
     }
     
     override func viewDidLayoutSubviews() {
@@ -129,25 +133,34 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInDeleg
     }
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        if error != nil {
-            print(error)
-            return
-        }
-        let accessToken = FBSDKAccessToken.current()
-        let credentials = FIRFacebookAuthProvider.credential(withAccessToken: (accessToken?.tokenString)!)
-        FIRAuth.auth()?.signIn(with: credentials, completion: { (user, error) in
-            if error != nil {
-                print(error!)
+        
+        if (error == nil) {
+            if result.isCancelled {
                 return
             }
             
-            if let user = user {
-                self.socialEmail = user.email!
-                self.fetchMembers()
-            }
+            let accessToken = FBSDKAccessToken.current()
             
-            print("Success logging in with Facebook", user ?? "")
-        })
+            let credentials = FIRFacebookAuthProvider.credential(withAccessToken: (accessToken?.tokenString)!)
+            FIRAuth.auth()?.signIn(with: credentials, completion: { (user, error) in
+                if error != nil {
+                    print(error!)
+                    return
+                }
+                
+                if let user = user {
+                    self.socialEmail = user.email!
+                    self.fetchMembers()
+                }
+                
+                print("Success logging in with Facebook", user ?? "")
+            })
+        }
+        else {
+            print(error)
+            return
+        }
+        
     }
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
@@ -222,6 +235,27 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInDeleg
                 self.present(loginAlert, animated: true, completion: nil)
             }
         }
+    }
+    
+    func createToolbar() {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(ViewController.dismissKeyboard))
+        
+        toolbar.setItems([doneButton], animated: false)
+        toolbar.isUserInteractionEnabled = true
+        usernameText.inputAccessoryView = toolbar
+        passwordText.inputAccessoryView = toolbar
+    }
+    
+    func dismissKeyboard(){
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
 }
 

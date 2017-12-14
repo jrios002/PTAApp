@@ -64,6 +64,8 @@ class AddEventViewController: UIViewController, UIImagePickerControllerDelegate,
     let gradientLayer = CAGradientLayer()
     override func viewDidLoad() {
         super.viewDidLoad()
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AddEventViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
         eventImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectEventImageView)))
         eventImage.isUserInteractionEnabled = true
         if (currentMember.firstName?.isEmpty)! {

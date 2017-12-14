@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		092D45FE0A0F2FBF64081E0A /* Pods_PTAApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DF8D41B9101169E4E4C8219 /* Pods_PTAApp.framework */; };
-		54013E771F64C6AB0048B5A1 /* NormalUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54013E761F64C6AB0048B5A1 /* NormalUser.swift */; };
 		541162E31F7DD6ED0035E425 /* SchoolEventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541162E21F7DD6ED0035E425 /* SchoolEventListViewController.swift */; };
 		541162E51F7DDA910035E425 /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541162E41F7DDA910035E425 /* EventDetailsViewController.swift */; };
 		541162E71F7DE25B0035E425 /* ItemsForSaleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541162E61F7DE25B0035E425 /* ItemsForSaleListViewController.swift */; };
@@ -25,6 +24,9 @@
 		54409CF31F8C3E9A003411D7 /* AddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54409CF21F8C3E9A003411D7 /* AddEventViewController.swift */; };
 		54409CF51F8C4414003411D7 /* AddEventVolunteersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54409CF41F8C4414003411D7 /* AddEventVolunteersViewController.swift */; };
 		54409CF71F8C4AC2003411D7 /* AddVolunteerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54409CF61F8C4AC2003411D7 /* AddVolunteerTableViewCell.swift */; };
+		5440EED61FDD95FF0031D45A /* MemberCartMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5440EED51FDD95FF0031D45A /* MemberCartMgr.swift */; };
+		5440EED81FDD9DF20031D45A /* MemberCartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5440EED71FDD9DF20031D45A /* MemberCartItem.swift */; };
+		5440EEDC1FDDA3110031D45A /* CartItemsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5440EEDB1FDDA3110031D45A /* CartItemsTableViewCell.swift */; };
 		5446F7B21F80776A004EE24D /* VolunteerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5446F7B11F80776A004EE24D /* VolunteerListViewController.swift */; };
 		5446F7B41F807BE4004EE24D /* VolunteerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5446F7B31F807BE4004EE24D /* VolunteerTableViewCell.swift */; };
 		5446F7B91F809D56004EE24D /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5446F7B81F809D56004EE24D /* MessagesViewController.swift */; };
@@ -45,6 +47,8 @@
 		5481AEE21F9458CE00C489EA /* UIApplicationAndExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5481AEE11F9458CE00C489EA /* UIApplicationAndExtension.swift */; };
 		5491EAAC1FC9FDDC0089977E /* SocialMediaShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5491EAAB1FC9FDDC0089977E /* SocialMediaShareViewController.swift */; };
 		5491EAAE1FC9FEE00089977E /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5491EAAD1FC9FEE00089977E /* Social.framework */; };
+		5491EAB01FDA0E3E0089977E /* MemberCartItemFirebaseSvc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5491EAAF1FDA0E3E0089977E /* MemberCartItemFirebaseSvc.swift */; };
+		5491EAB21FDA0EC80089977E /* MemberCartItemFirebaseDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5491EAB11FDA0EC80089977E /* MemberCartItemFirebaseDBService.swift */; };
 		5492791F1F60BE6500BEDAFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5492791E1F60BE6500BEDAFB /* AppDelegate.swift */; };
 		549279211F60BE6500BEDAFB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549279201F60BE6500BEDAFB /* ViewController.swift */; };
 		549279241F60BE6500BEDAFB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 549279221F60BE6500BEDAFB /* Main.storyboard */; };
@@ -105,7 +109,6 @@
 		026537535D3298217EE82449 /* Pods_PTAAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PTAAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DF8D41B9101169E4E4C8219 /* Pods_PTAApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PTAApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		44679622FB36D8546345CAC6 /* Pods-PTAAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PTAAppUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PTAAppUITests/Pods-PTAAppUITests.release.xcconfig"; sourceTree = "<group>"; };
-		54013E761F64C6AB0048B5A1 /* NormalUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalUser.swift; sourceTree = "<group>"; };
 		541162E21F7DD6ED0035E425 /* SchoolEventListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolEventListViewController.swift; sourceTree = "<group>"; };
 		541162E41F7DDA910035E425 /* EventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
 		541162E61F7DE25B0035E425 /* ItemsForSaleListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsForSaleListViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +125,9 @@
 		54409CF21F8C3E9A003411D7 /* AddEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventViewController.swift; sourceTree = "<group>"; };
 		54409CF41F8C4414003411D7 /* AddEventVolunteersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventVolunteersViewController.swift; sourceTree = "<group>"; };
 		54409CF61F8C4AC2003411D7 /* AddVolunteerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddVolunteerTableViewCell.swift; sourceTree = "<group>"; };
+		5440EED51FDD95FF0031D45A /* MemberCartMgr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberCartMgr.swift; sourceTree = "<group>"; };
+		5440EED71FDD9DF20031D45A /* MemberCartItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberCartItem.swift; sourceTree = "<group>"; };
+		5440EEDB1FDDA3110031D45A /* CartItemsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartItemsTableViewCell.swift; sourceTree = "<group>"; };
 		5446F7B11F80776A004EE24D /* VolunteerListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteerListViewController.swift; sourceTree = "<group>"; };
 		5446F7B31F807BE4004EE24D /* VolunteerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteerTableViewCell.swift; sourceTree = "<group>"; };
 		5446F7B81F809D56004EE24D /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
@@ -142,6 +148,8 @@
 		5481AEE11F9458CE00C489EA /* UIApplicationAndExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplicationAndExtension.swift; sourceTree = "<group>"; };
 		5491EAAB1FC9FDDC0089977E /* SocialMediaShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialMediaShareViewController.swift; sourceTree = "<group>"; };
 		5491EAAD1FC9FEE00089977E /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		5491EAAF1FDA0E3E0089977E /* MemberCartItemFirebaseSvc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberCartItemFirebaseSvc.swift; sourceTree = "<group>"; };
+		5491EAB11FDA0EC80089977E /* MemberCartItemFirebaseDBService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberCartItemFirebaseDBService.swift; sourceTree = "<group>"; };
 		5492791B1F60BE6500BEDAFB /* PTAApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PTAApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5492791E1F60BE6500BEDAFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		549279201F60BE6500BEDAFB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -263,6 +271,8 @@
 				545C93FB1FAAAED50025477A /* MemberFirebaseDBService.swift */,
 				544B24CC1FBA9C6400A11276 /* IItemsForSaleFirebaseSvc.swift */,
 				544B24CE1FBA9CC200A11276 /* ItemForSaleFirebaseDBService.swift */,
+				5491EAAF1FDA0E3E0089977E /* MemberCartItemFirebaseSvc.swift */,
+				5491EAB11FDA0EC80089977E /* MemberCartItemFirebaseDBService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -371,7 +381,7 @@
 				549279511F60C26100BEDAFB /* Event.swift */,
 				549279531F60C31F00BEDAFB /* Member.swift */,
 				549279551F60C68300BEDAFB /* ItemForSale.swift */,
-				54013E761F64C6AB0048B5A1 /* NormalUser.swift */,
+				5440EED71FDD9DF20031D45A /* MemberCartItem.swift */,
 			);
 			name = Domain;
 			sourceTree = "<group>";
@@ -389,6 +399,7 @@
 				545C93F51FA7F1330025477A /* SchoolListTableViewCell.swift */,
 				545C93F71FA8081A0025477A /* EventListTableViewCell.swift */,
 				544B24CA1FBA97CC00A11276 /* ItemsCollectionViewCell.swift */,
+				5440EEDB1FDDA3110031D45A /* CartItemsTableViewCell.swift */,
 			);
 			name = Presentation;
 			sourceTree = "<group>";
@@ -402,6 +413,7 @@
 				542C28BB1F85E0B200871E70 /* MemberMgr.swift */,
 				54409CE61F86756F003411D7 /* SchoolMgr.swift */,
 				544B24D01FBAA18B00A11276 /* ItemForSaleMgr.swift */,
+				5440EED51FDD95FF0031D45A /* MemberCartMgr.swift */,
 			);
 			name = Business;
 			sourceTree = "<group>";
@@ -713,6 +725,7 @@
 				542C28B61F85DA1300871E70 /* IEventSQLiteSvc.swift in Sources */,
 				54BFF97B1FA36FD100A54F74 /* IEventFirebaseSvc.swift in Sources */,
 				541162E71F7DE25B0035E425 /* ItemsForSaleListViewController.swift in Sources */,
+				5491EAB21FDA0EC80089977E /* MemberCartItemFirebaseDBService.swift in Sources */,
 				54C371771F83126D004D972A /* EventSvcSQLite.swift in Sources */,
 				54CC01BA1FC3B9ED007FAE3B /* CartViewController.swift in Sources */,
 				54D9E7571F70AE11006AEE86 /* SchoolCreationViewController.swift in Sources */,
@@ -731,7 +744,7 @@
 				549279501F60C13700BEDAFB /* School.swift in Sources */,
 				54AF337A1F74A13100AC856C /* UserNamePasswordCreateViewController.swift in Sources */,
 				544B24CF1FBA9CC200A11276 /* ItemForSaleFirebaseDBService.swift in Sources */,
-				54013E771F64C6AB0048B5A1 /* NormalUser.swift in Sources */,
+				5440EED81FDD9DF20031D45A /* MemberCartItem.swift in Sources */,
 				54CD747C1F7B382700ACBF46 /* FirebaseMgr.swift in Sources */,
 				542C28B81F85DA6900871E70 /* IMemberSQLiteSvc.swift in Sources */,
 				542C28BA1F85DABE00871E70 /* MemberSvcSQLite.swift in Sources */,
@@ -754,6 +767,7 @@
 				544AB06A1F9EB74F00E2BCE2 /* ISchoolFirebaseSvc.swift in Sources */,
 				54409CE71F86756F003411D7 /* SchoolMgr.swift in Sources */,
 				542C28BC1F85E0B200871E70 /* MemberMgr.swift in Sources */,
+				5440EEDC1FDDA3110031D45A /* CartItemsTableViewCell.swift in Sources */,
 				5446F7B41F807BE4004EE24D /* VolunteerTableViewCell.swift in Sources */,
 				54CC01B81FC1E5F1007FAE3B /* ItemDetailsViewController.swift in Sources */,
 				544AB0681F9EB50400E2BCE2 /* SchoolFirebaseDBService.swift in Sources */,
@@ -766,6 +780,8 @@
 				5446F7B91F809D56004EE24D /* MessagesViewController.swift in Sources */,
 				54C371721F83115B004D972A /* FMResultSet.m in Sources */,
 				54CD74781F7B369D00ACBF46 /* IFirebaseService.swift in Sources */,
+				5491EAB01FDA0E3E0089977E /* MemberCartItemFirebaseSvc.swift in Sources */,
+				5440EED61FDD95FF0031D45A /* MemberCartMgr.swift in Sources */,
 				544A2D301F7882E400868CE6 /* FirebaseLoginSvc.swift in Sources */,
 				54409CE51F866E65003411D7 /* SchoolSvcSQLite.swift in Sources */,
 				54C371731F83115B004D972A /* FMDatabaseQueue.m in Sources */,

@@ -64,6 +64,8 @@ class VolunteerListViewController: UIViewController, UITableViewDataSource, UITa
     
     override func viewWillAppear(_ animated: Bool) {
         oldEvent = event
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(VolunteerListViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
         if (currentMember.firstName?.isEmpty)! {
             guestBtn.title = "Hello Guest"
         }
@@ -140,5 +142,9 @@ class VolunteerListViewController: UIViewController, UITableViewDataSource, UITa
         let cell = myTableView.cellForRow(at: cellIndexPath!) as! VolunteerTableViewCell
         let index: Int = (cellIndexPath?.row)!
         event.volunteers?[index] = cell.nameTxt.text!
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

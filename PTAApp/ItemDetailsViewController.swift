@@ -31,6 +31,51 @@ class ItemDetailsViewController: UIViewController {
     }
     
     @IBAction func addToCartBtn(_ sender: Any) {
+        if quantity.text == "" {
+            let quantityAlert = UIAlertController(title: "Missing Quantity!!", message: "Please enter the amount of this item you wish to purchase in the Quantity Box!!", preferredStyle: UIAlertControllerStyle.alert)
+            
+            quantityAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                print("Exiting from alert")
+            }))
+            
+            present(quantityAlert, animated: true, completion: nil)
+        }
+        else {
+            if (currentMember.firstName?.isEmpty)! {
+                let memberAlert = UIAlertController(title: "Not Logged In!!", message: "You must be logged in to add to a cart!!", preferredStyle: UIAlertControllerStyle.alert)
+                
+                memberAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                    print("Exiting from alert")
+                }))
+                
+                present(memberAlert, animated: true, completion: nil)
+            }
+            else {
+                let quantityNumber: Float = Float(quantity.text!)!
+                let price = quantityNumber * item.cost!
+                let cartMgr: MemberCartMgr = MemberCartMgr()
+                cartMgr.create(item, member: currentMember, quantity: Int(quantity.text!)!, cost: price)
+                
+                let activityInd: CustomActivityIndicator = CustomActivityIndicator()
+                activityInd.customActivityIndicatory(self.view, startAnimate: true).startAnimating()
+                
+                UIApplication.shared.beginIgnoringInteractionEvents()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+                    UIApplication.shared.endIgnoringInteractionEvents()
+                    activityInd.customActivityIndicatory(self.view, startAnimate: false).stopAnimating()
+                    
+                    let addedAlert = UIAlertController(title: "SUCCESS!!!", message: "Item successfully added to cart!!", preferredStyle: UIAlertControllerStyle.alert)
+                    
+                    addedAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                        print("Exiting from alert")
+                        self.performSegue(withIdentifier: "unwindFromItemDetails", sender: self)
+                    }))
+                    
+                    self.present(addedAlert, animated: true, completion: nil)
+                }
+            }
+        }
     }
     
     @IBAction func editItem(_ sender: Any) {
@@ -59,6 +104,9 @@ class ItemDetailsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         view.setGradientBackground(colorOne: Colors.orange, colorTwo: Colors.blue, gradientLayer: self.gradientLayer)
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ItemDetailsViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        quantity.keyboardType = UIKeyboardType.numberPad
         fetchItem(item: item)
         let activityInd: CustomActivityIndicator = CustomActivityIndicator()
         activityInd.customActivityIndicatory(self.view, startAnimate: true).startAnimating()
@@ -121,5 +169,9 @@ class ItemDetailsViewController: UIViewController {
     func fetchItem(item: ItemForSale) {
         let itemMgr: ItemForSaleMgr = ItemForSaleMgr()
         self.item = itemMgr.getItemForSale(item.name!, school: selectedSchool)
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

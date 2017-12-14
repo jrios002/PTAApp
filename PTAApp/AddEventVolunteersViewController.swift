@@ -54,6 +54,7 @@ class AddEventVolunteersViewController: UIViewController, UITableViewDelegate, U
                 print("Exiting from alert")
             }))
             
+            self.dismissKeyboard()
             self.present(loginAlert, animated: true, completion: nil)
         }
         else {
@@ -84,6 +85,8 @@ class AddEventVolunteersViewController: UIViewController, UITableViewDelegate, U
     let gradientLayer = CAGradientLayer()
     override func viewDidLoad() {
         super.viewDidLoad()
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AddEventVolunteersViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
         if (currentMember.firstName?.isEmpty)! {
             guestBtn.title = "Hello Guest"
         }
@@ -157,5 +160,9 @@ class AddEventVolunteersViewController: UIViewController, UITableViewDelegate, U
         default:
             print("Error in stored cell text values!")
         }
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

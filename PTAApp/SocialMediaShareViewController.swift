@@ -40,6 +40,7 @@ class SocialMediaShareViewController: UIViewController {
                         print("Exiting from alert")
                     }))
                     
+                    self.dismissKeyboard()
                     self.present(postAlert, animated: true, completion: nil)
                 }
                 
@@ -78,6 +79,7 @@ class SocialMediaShareViewController: UIViewController {
                         print("Exiting from alert")
                     }))
                     
+                    self.dismissKeyboard()
                     self.present(postAlert, animated: true, completion: nil)
                 }
                 
@@ -93,6 +95,8 @@ class SocialMediaShareViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         view.setGradientBackground(colorOne: Colors.orange, colorTwo: Colors.blue, gradientLayer: gradientLayer)
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SocialMediaShareViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
         textToShare.text = ""
         textToShare.placeholder = "Type social media message here..."
     }
@@ -101,5 +105,9 @@ class SocialMediaShareViewController: UIViewController {
         super.viewWillLayoutSubviews()
         gradientLayer.frame = view.layer.bounds
         view.setGradientBackground(colorOne: Colors.orange, colorTwo: Colors.blue, gradientLayer: gradientLayer)
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

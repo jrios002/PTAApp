@@ -25,6 +25,16 @@ class UserNamePasswordCreateViewController: UIViewController {
     
     @IBAction func nextBtn(_ sender: Any) {
         var message: String = ""
+        if usernameText.text == "" || passwordText.text == "" || passwordVerifyText.text == "" {
+            let noNameAlert = UIAlertController(title: "ERROR!!", message: "No text field can be left blank.", preferredStyle: UIAlertControllerStyle.alert)
+            
+            noNameAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                print("Exiting from alert")
+            }))
+            dismissKeyboard()
+            
+            self.present(noNameAlert, animated: true, completion: nil)
+        }
         
         if passwordText.text == passwordVerifyText.text {
             if usernameText.text != "" && passwordText.text != ""
@@ -73,6 +83,7 @@ class UserNamePasswordCreateViewController: UIViewController {
                                 self.performSegue(withIdentifier: "unwindFromUserNameCreate", sender: self)
                             }))
                             
+                            self.dismissKeyboard()
                             self.present(updateAlert, animated: true, completion: nil)
                         }
                         else {
@@ -85,6 +96,7 @@ class UserNamePasswordCreateViewController: UIViewController {
                                 self.performSegue(withIdentifier: "unwindFromUserNameCreate", sender: self)
                             }))
                             
+                            self.dismissKeyboard()
                             self.present(updateAlert, animated: true, completion: nil)
                         }
                     }
@@ -112,18 +124,20 @@ class UserNamePasswordCreateViewController: UIViewController {
                                 print("Exiting from alert")
                             }))
                             
+                            self.dismissKeyboard()
                             self.present(loginAlert, animated: true, completion: nil)
                         }
                     }
                 }
             }
         } else {
-            let loginAlert = UIAlertController(title: "Password Do Not Match!!", message: "Please Verify that password were entered correctly and try again!", preferredStyle: UIAlertControllerStyle.alert)
+            let loginAlert = UIAlertController(title: "Passwords Do Not Match!!", message: "Please Verify that passwords were entered correctly and try again!", preferredStyle: UIAlertControllerStyle.alert)
             
             loginAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
                 print("Exiting from alert")
             }))
             
+            self.dismissKeyboard()
             present(loginAlert, animated: true, completion: nil)
             
             passwordText.text = ""
@@ -141,6 +155,8 @@ class UserNamePasswordCreateViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         view.setGradientBackground(colorOne: Colors.orange, colorTwo: Colors.blue, gradientLayer: gradientLayer)
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UserNamePasswordCreateViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
         if currentMember.firstName != "" {
             isUpdating = true
             nextBtn.setTitle("Update", for: .normal)
@@ -167,4 +183,7 @@ class UserNamePasswordCreateViewController: UIViewController {
         NSLog("exiting prepare for segue")
     }
 
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }

@@ -57,6 +57,8 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
     let gradientLayer = CAGradientLayer()
     override func viewDidLoad() {
         super.viewDidLoad()
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MessagesViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
         schoolRef = (selectedSchool.name?.lowercased())! + selectedSchool.zipCode!
         if (currentMember.firstName?.isEmpty)! {
             guestBtn.title = "Hello Guest"
@@ -101,5 +103,9 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
             chatTxt.text = ""
         }
         return true
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

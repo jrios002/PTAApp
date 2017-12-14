@@ -18,8 +18,6 @@ class SchoolCreationViewController: UIViewController, UIPickerViewDelegate, UIPi
     @IBOutlet weak var zipCodeText: UITextField!
     @IBOutlet weak var phoneText: UITextField!
     @IBOutlet weak var stateText: UITextField!
-    @IBAction func addImageBtn(_ sender: UIButton) {
-    }
     @IBAction func createSchoolBtn(_ sender: UIButton) {
         randomString = getRandomString(length: 10)
         if nameText.text != "" && zipCodeText.text != "" {
@@ -67,6 +65,10 @@ class SchoolCreationViewController: UIViewController, UIPickerViewDelegate, UIPi
     let gradientLayer = CAGradientLayer()
     override func viewDidLoad() {
         super.viewDidLoad()
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SchoolCreationViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        phoneText.keyboardType = UIKeyboardType.numbersAndPunctuation
+        zipCodeText.keyboardType = UIKeyboardType.numbersAndPunctuation
         createStatePicker()
         createToolbar()
         schoolImage.image = #imageLiteral(resourceName: "emptyImage2")
@@ -165,6 +167,5 @@ class SchoolCreationViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         dismiss(animated: true, completion: nil)
     }
-
 }
 

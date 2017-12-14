@@ -30,7 +30,17 @@ class SchoolCreateVerifyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.setGradientBackground(colorOne: Colors.orange, colorTwo: Colors.blue, gradientLayer: gradientLayer)
+        
         accessCodeText.text = codeText
+        let activityInd: CustomActivityIndicator = CustomActivityIndicator()
+        activityInd.customActivityIndicatory(self.view, startAnimate: true).startAnimating()
+        
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            UIApplication.shared.endIgnoringInteractionEvents()
+            activityInd.customActivityIndicatory(self.view, startAnimate: false).stopAnimating()
+            
+        }
     }
     
     override func viewDidLayoutSubviews() {

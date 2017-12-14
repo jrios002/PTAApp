@@ -78,6 +78,7 @@ class RegisterUserViewController: UIViewController, UIPickerViewDelegate, UIPick
                             print("Exiting from alert")
                         }))
                         
+                        self.dismissKeyboard()
                         self.present(codeAlert, animated: true, completion: nil)
                         adminCodeText.text = ""
                     }
@@ -93,6 +94,7 @@ class RegisterUserViewController: UIViewController, UIPickerViewDelegate, UIPick
                                 self.present(vc, animated: true, completion: nil)
                             }))
                             
+                            self.dismissKeyboard()
                             self.present(successAlert, animated: true, completion: nil)
                         }
                         else {
@@ -107,6 +109,7 @@ class RegisterUserViewController: UIViewController, UIPickerViewDelegate, UIPick
                                 self.present(vc, animated: true, completion: nil)
                             }))
                             
+                            self.dismissKeyboard()
                             self.present(successAlert, animated: true, completion: nil)
                         }
                     }
@@ -118,6 +121,7 @@ class RegisterUserViewController: UIViewController, UIPickerViewDelegate, UIPick
                         print("Exiting from alert")
                     }))
                     
+                    self.dismissKeyboard()
                     self.present(codeAlert, animated: true, completion: nil)
                     adminCodeText.text = ""
                 }
@@ -133,6 +137,7 @@ class RegisterUserViewController: UIViewController, UIPickerViewDelegate, UIPick
                         self.present(vc, animated: true, completion: nil)
                     }))
                     
+                    self.dismissKeyboard()
                     self.present(successAlert, animated: true, completion: nil)
                 }
                 else {
@@ -147,6 +152,7 @@ class RegisterUserViewController: UIViewController, UIPickerViewDelegate, UIPick
                         self.present(vc, animated: true, completion: nil)
                     }))
                     
+                    self.dismissKeyboard()
                     self.present(successAlert, animated: true, completion: nil)
                 }
             }
@@ -158,6 +164,7 @@ class RegisterUserViewController: UIViewController, UIPickerViewDelegate, UIPick
                 print("Exiting from alert")
             }))
             
+            self.dismissKeyboard()
             self.present(registerAlert, animated: true, completion: nil)
         }
     }
@@ -165,6 +172,11 @@ class RegisterUserViewController: UIViewController, UIPickerViewDelegate, UIPick
     let gradientLayer = CAGradientLayer()
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RegisterUserViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
+        phone.keyboardType = UIKeyboardType.numbersAndPunctuation
         
         if currentMember.firstName != "" {
             isLoggedIn = true
@@ -318,6 +330,7 @@ class RegisterUserViewController: UIViewController, UIPickerViewDelegate, UIPick
                     print("Exiting from alert")
                 }))
                 
+                self.dismissKeyboard()
                 self.present(tableLoadAlert, animated: true, completion: nil)
             }
             else {

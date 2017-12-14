@@ -31,6 +31,8 @@ class MessageBoardListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         view.setGradientBackground(colorOne: Colors.orange, colorTwo: Colors.blue, gradientLayer: gradientLayer)
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MessageBoardListViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
         if (currentMember.firstName?.isEmpty)! {
             guestBtn.title = "Hello Guest"
         }
@@ -67,5 +69,9 @@ class MessageBoardListViewController: UIViewController {
         }
         
         NSLog("exiting prepareForSegue")
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
